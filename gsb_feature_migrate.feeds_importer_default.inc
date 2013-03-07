@@ -114,11 +114,24 @@ function gsb_feature_migrate_feeds_importer_default() {
     'name' => 'News',
     'description' => '',
     'fetcher' => array(
-      'plugin_key' => 'FeedsHTTPFetcher',
+      'plugin_key' => 'FeedsCrawler',
       'config' => array(
         'auto_detect_feeds' => 0,
         'use_pubsubhubbub' => 0,
         'designated_hub' => '',
+        'crawler' => array(
+          'num_pages' => '1',
+          'delay' => '1',
+          'first_run' => '1',
+          'auto' => '0',
+          'xpath' => '',
+          'url' => array(
+            'url_pattern' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_node.json?page=$index&pagesize=50&params[type]=news',
+            'initial' => '0',
+            'increment' => '1',
+          ),
+        ),
+        'crawled' => FALSE,
       ),
     ),
     'parser' => array(
@@ -161,7 +174,7 @@ function gsb_feature_migrate_feeds_importer_default() {
           0 => array(
             'source' => 'jsonpath_parser:0',
             'target' => 'nid',
-            'unique' => FALSE,
+            'unique' => 1,
           ),
           1 => array(
             'source' => 'jsonpath_parser:1',
