@@ -1,0 +1,17 @@
+<?php
+/**
+ * @file
+ * Code for the GSB Feature Migrate feature.
+ */
+
+include_once 'gsb_feature_migrate.features.inc';
+
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function gsb_feature_migrate_ctools_plugin_directory($module, $plugin) {
+  if ($module == 'feeds_tamper') {
+    return 'plugins';
+  }
+}

@@ -7,14 +7,14 @@
  * Used to replace old "fid" values in fields with new "fid" values of imported files.
  */
 $plugin = array(
-  'form' => 'gsb_feeds_file_id_replace_form',
-  'callback' => 'gsb_feeds_file_id_replace_callback',
+  'form' => 'gsb_feature_migrate_file_id_replace_form',
+  'callback' => 'gsb_feature_migrate_file_id_replace_callback',
   'name' => 'File ID replace',
   'multi' => 'direct',
   'category' => 'Text',
 );
 
-function gsb_feeds_file_id_replace_form($importer, $element_key, $settings) {
+function gsb_feature_migrate_file_id_replace_form($importer, $element_key, $settings) {
   $form = array();
 
   $form['html'] = array(
@@ -30,7 +30,7 @@ function gsb_feeds_file_id_replace_form($importer, $element_key, $settings) {
   return $form;
 }
 
-function gsb_feeds_file_id_replace_callback($result, $item_key, $element_key, &$field, $settings) {
+function gsb_feature_migrate_file_id_replace_callback($result, $item_key, $element_key, &$field, $settings) {
   $fid_regex = '/"fid":"(\d+)"/';
 
   // Find all fids in the body
@@ -49,8 +49,8 @@ function gsb_feeds_file_id_replace_callback($result, $item_key, $element_key, &$
 
     $response = drupal_http_request($request_url);
     if ($response->code == 200) {
-      $old_file = drupal_json_decode($response->data);
-      $new_file = file_uri_to_object($old_file[0]['uri']);
+      $old_file = json_decode($response->data);
+      $new_file = file_uri_to_object($old_file[0]->uri);
       $field = str_replace('"fid":"' . $old_fid . '"', '"fid":"' . $new_file->fid . '"', $field);
     }
   }
