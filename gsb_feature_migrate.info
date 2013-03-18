@@ -20,5 +20,6 @@ features[feeds_importer][] = business_insights
 features[feeds_importer][] = files
 features[feeds_importer][] = media_mention
 features[feeds_importer][] = news
+features[feeds_importer][] = ranking_to_media_mention
 features[feeds_tamper][] = business_insights-jsonpath_parser_2-file_id_replace
 features[feeds_tamper][] = news-jsonpath_parser_3-file_id_replace
