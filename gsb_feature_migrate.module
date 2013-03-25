@@ -77,3 +77,21 @@ function gsb_feature_migrate_image_feeds_set_target($source, $entity, $target, $
 
   $entity->$field_name = $field;
 }
+
+/**
+ * Implements hook_menu().
+ *
+ * Add custom taxonomy import script callback.
+ */
+function gsb_feature_migrate_menu() {
+  $items['taxonomy_import'] = array(
+    'title' => 'Import taxonomies',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('gsb_feature_migrate_taxonomy_form'),
+    'access arguments' => array('administer taxonomy'),
+    'file' => 'gsb_feature_migrate_taxonomy.inc',
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
