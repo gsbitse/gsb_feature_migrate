@@ -156,14 +156,20 @@ function taxonomy_term_save_tid($term) {
  * Default vocabulary mappings configuration.
  */
 function gsb_feature_migrate_taxonomy_get_vocabulary_mappings() {
+  // Use vocabulary machine_names because vids can change during the builds.
   $mappings = array(
-    15 => 6,  // Function -> Discipline
-    18 => 3,  // Principle -> Business Insight Topic
-    16 => 9,  // Industry -> Industry
-    17 => 11, // Region -> Region
-    19 => 5,  // Company -> Company/Organization
-    46 => 12, // Tag -> Tag
+    15 => 'discipline',  // Function -> Discipline
+    18 => 'business_insight_topic',  // Principle -> Business Insight Topic
+    16 => 'industry',  // Industry -> Industry
+    17 => 'region', // Region -> Region
+    19 => 'company_organization',  // Company -> Company/Organization
+    46 => 'tag', // Tag -> Tag
   );
+
+  foreach ($mappings as $old_vid => $new_vocabulary_name) {
+    $new_vocabulary = taxonomy_vocabulary_machine_name_load($new_vocabulary_name);
+    $mappings[$old_vid] = $new_vocabulary->vid;
+  }
 
   return $mappings;
 }

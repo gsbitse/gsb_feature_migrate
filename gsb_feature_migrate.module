@@ -25,7 +25,7 @@ function gsb_feature_migrate_feeds_processor_targets_alter(&$targets, $entity_ty
   foreach (field_info_instances($entity_type, $bundle_name) as $name => $instance) {
     $info = field_info_field($name);
 
-    if ($info['type'] ='image') {
+    if ($info['type'] == 'image') {
       $targets[$name . ':uri_no_download'] = array(
         'name' => t('@label: URI without download', array('@label' => $instance['label'])),
         'callback' => 'gsb_feature_migrate_image_feeds_set_target',
