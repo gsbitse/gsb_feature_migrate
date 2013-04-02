@@ -14,6 +14,7 @@ function gsb_feature_migrate_taxonomy_form() {
     '#description' => t('Upload a CSV dump to import taxonomies.'),
     '#upload_location' => 'private://taxonomy_import/',
     '#upload_validators' => array('file_validate_extensions' => array('csv')),
+    '#default_value' => variable_get('gsb_feature_migrate_taxonomy_import_fid', ''),
   );
 
   $form['submit'] = array(
@@ -41,7 +42,8 @@ function gsb_feature_migrate_taxonomy_form_validate($form, &$form_state) {
  * Call import callback.
  */
 function gsb_feature_migrate_taxonomy_form_submit($form, &$form_state) {
-  gsb_feature_migrate_import_taxonomy($form_state['complete form']['upload']['#file']->uri);
+  variable_set('gsb_feature_migrate_taxonomy_import_fid', $form_state['values']['upload']);
+  gsb_feature_migrate_taxonomy_import($form_state['complete form']['upload']['#file']->uri);
 }
 
 /**
@@ -50,19 +52,32 @@ function gsb_feature_migrate_taxonomy_form_submit($form, &$form_state) {
  * Create terms with term ids in mapped vocabularies.
  * Perform additional tasks before taxonomy import.
  */
-function gsb_feature_migrate_import_taxonomy($url) {
+function gsb_feature_migrate_taxonomy_import($url) {
   $file = fopen($url, 'r');
 
   $vocabulary_mappings = gsb_feature_migrate_taxonomy_get_vocabulary_mappings();
+  $vocabulary_names = taxonomy_vocabulary_get_names();
 
+  // Loop throw CSV file.
   while (($line = fgetcsv($file, 4096, ',', '"')) != FALSE) {
-    list($tid, $vid, $name, $weight, $parent) = $line;
+    list($tid, $vocabulary_machine_name, $name, $weight, $parent) = $line;
+    if (array_key_exists($vocabulary_machine_name, $vocabulary_mappings)) {
+      // Work with new vocabulary_machine_name.
+      $vocabulary_machine_name = $vocabulary_mappings[$vocabulary_machine_name];
 
-    if (array_key_exists($vid, $vocabulary_mappings)) {
-      $vid = $vocabulary_mappings[$vid];
+      // In case we find matched terms, replace the tid with old one.
+      $matched_terms = taxonomy_get_term_by_name($name, $vocabulary_machine_name);
+      if (!empty($matched_terms)) {
+        foreach ($matched_terms as $matched_term) {
+          _gsb_feature_migrate_taxonomy_replace_tid($matched_term->tid, $tid);
+        }
+        continue;
+      }
+
+      // Otherwise we create new terms.
       $term = new stdClass();
       $term->tid = $tid;
-      $term->vid = $vid;
+      $term->vid = $vocabulary_names[$vocabulary_machine_name]->vid;
       $term->name = $name;
       $term->weight = $weight;
       $term->parent = $parent;
@@ -75,7 +90,6 @@ function gsb_feature_migrate_import_taxonomy($url) {
     }
   };
 }
-
 
 /**
  * Borrowed from Drupal Core. The callback saves terms with tids if is_new param is set.
@@ -158,18 +172,41 @@ function taxonomy_term_save_tid($term) {
 function gsb_feature_migrate_taxonomy_get_vocabulary_mappings() {
   // Use vocabulary machine_names because vids can change during the builds.
   $mappings = array(
-    15 => 'discipline',  // Function -> Discipline
-    18 => 'business_insight_topic',  // Principle -> Business Insight Topic
-    16 => 'industry',  // Industry -> Industry
-    17 => 'region', // Region -> Region
-    19 => 'company_organization',  // Company -> Company/Organization
-    46 => 'tag', // Tag -> Tag
+    'function' => 'discipline', // Function -> Discipline
+    'principle' => 'business_insight_topic', // Principle -> Business Insight Topic
+    'industry' => 'industry', // Industry -> Industry
+    'region' => 'region', // Region -> Region
+    'company' => 'company_organization', // Company -> Company/Organization
+    'tag' => 'tag', // Tag -> Tag
   );
 
-  foreach ($mappings as $old_vid => $new_vocabulary_name) {
-    $new_vocabulary = taxonomy_vocabulary_machine_name_load($new_vocabulary_name);
-    $mappings[$old_vid] = $new_vocabulary->vid;
-  }
-
   return $mappings;
+}
+
+/**
+ * Replace new term id with old one.
+ *
+ * This is done to preserve URLs and terms associated to nodes.
+ *
+ */
+function _gsb_feature_migrate_taxonomy_replace_tid($existing_tid, $new_tid) {
+  // Update term id in taxonomy_term_data table.
+  db_update('taxonomy_term_data')->fields(array('tid' => $new_tid))
+    ->condition('tid', $existing_tid, '=')
+    ->execute();
+
+  // Update term hierarchy with updated tids.
+  db_update('taxonomy_term_hierarchy')->fields(array('tid' => $new_tid))
+    ->condition('tid', $existing_tid, '=')
+    ->execute();
+  db_update('taxonomy_term_hierarchy')->fields(array('parent' => $new_tid))
+    ->condition('parent', $existing_tid, '=')
+    ->execute();
+
+  // Replace aliases.
+  $path = path_load('taxonomy/term/' . $existing_tid);
+  if ($path !== FALSE) {
+    $path['source'] = 'taxonomy/term/' . $new_tid;
+    path_save($path);
+  }
 }
