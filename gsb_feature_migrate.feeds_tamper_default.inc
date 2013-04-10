@@ -41,6 +41,34 @@ function gsb_feature_migrate_feeds_tamper_default() {
   $feeds_tamper = new stdClass();
   $feeds_tamper->disabled = FALSE; /* Edit this to true to make a default feeds_tamper disabled initially */
   $feeds_tamper->api_version = 2;
+  $feeds_tamper->id = 'news_press_releases_to_news-blank_source_1-set_default_value';
+  $feeds_tamper->importer = 'news_press_releases_to_news';
+  $feeds_tamper->source = 'Blank source 1';
+  $feeds_tamper->plugin_id = 'default_value';
+  $feeds_tamper->settings = array(
+    'default_value' => 'press-release',
+  );
+  $feeds_tamper->weight = 0;
+  $feeds_tamper->description = 'Set default value';
+  $export['news_press_releases_to_news-blank_source_1-set_default_value'] = $feeds_tamper;
+
+  $feeds_tamper = new stdClass();
+  $feeds_tamper->disabled = FALSE; /* Edit this to true to make a default feeds_tamper disabled initially */
+  $feeds_tamper->api_version = 2;
+  $feeds_tamper->id = 'news_press_releases_to_news-jsonpath_parser_2-file_id_replace';
+  $feeds_tamper->importer = 'news_press_releases_to_news';
+  $feeds_tamper->source = 'jsonpath_parser:2';
+  $feeds_tamper->plugin_id = 'file_id_replace';
+  $feeds_tamper->settings = array(
+    'services_url' => 'rm/entity_file.json?param[fid]=$fid',
+  );
+  $feeds_tamper->weight = 0;
+  $feeds_tamper->description = 'File ID replace';
+  $export['news_press_releases_to_news-jsonpath_parser_2-file_id_replace'] = $feeds_tamper;
+
+  $feeds_tamper = new stdClass();
+  $feeds_tamper->disabled = FALSE; /* Edit this to true to make a default feeds_tamper disabled initially */
+  $feeds_tamper->api_version = 2;
   $feeds_tamper->id = 'news_to_business_insight-jsonpath_parser_2-file_id_replace';
   $feeds_tamper->importer = 'news_to_business_insight';
   $feeds_tamper->source = 'jsonpath_parser:2';
@@ -51,6 +79,20 @@ function gsb_feature_migrate_feeds_tamper_default() {
   $feeds_tamper->weight = 0;
   $feeds_tamper->description = 'File ID replace';
   $export['news_to_business_insight-jsonpath_parser_2-file_id_replace'] = $feeds_tamper;
+
+  $feeds_tamper = new stdClass();
+  $feeds_tamper->disabled = FALSE; /* Edit this to true to make a default feeds_tamper disabled initially */
+  $feeds_tamper->api_version = 2;
+  $feeds_tamper->id = 'news_to_school_story-blank_source_1-set_default_value';
+  $feeds_tamper->importer = 'news_to_school_story';
+  $feeds_tamper->source = 'Blank source 1';
+  $feeds_tamper->plugin_id = 'default_value';
+  $feeds_tamper->settings = array(
+    'default_value' => 'school-news',
+  );
+  $feeds_tamper->weight = 0;
+  $feeds_tamper->description = 'Set default value';
+  $export['news_to_school_story-blank_source_1-set_default_value'] = $feeds_tamper;
 
   $feeds_tamper = new stdClass();
   $feeds_tamper->disabled = FALSE; /* Edit this to true to make a default feeds_tamper disabled initially */

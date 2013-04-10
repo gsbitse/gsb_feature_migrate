@@ -30,7 +30,7 @@ function gsb_feature_migrate_feeds_importer_default() {
           'auto' => '0',
           'xpath' => '',
           'url' => array(
-            'url_pattern' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_node.json?page=$index&pagesize=50&params[type]=research',
+            'url_pattern' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_node.json?page=$index&pagesize=50&param[type]=research',
             'initial' => '0',
             'increment' => '1',
           ),
@@ -223,11 +223,25 @@ function gsb_feature_migrate_feeds_importer_default() {
     'name' => 'Files',
     'description' => '',
     'fetcher' => array(
-      'plugin_key' => 'FeedsHTTPFetcher',
+      'plugin_key' => 'FeedsCrawler',
       'config' => array(
-        'auto_detect_feeds' => FALSE,
-        'use_pubsubhubbub' => FALSE,
+        'auto_detect_feeds' => 0,
+        'use_pubsubhubbub' => 0,
         'designated_hub' => '',
+        'request_timeout' => '',
+        'crawler' => array(
+          'num_pages' => 0,
+          'delay' => '1',
+          'first_run' => '0',
+          'auto' => '0',
+          'xpath' => '',
+          'url' => array(
+            'url_pattern' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_file.json?page=$index&pagesize=10',
+            'initial' => '0',
+            'increment' => '1',
+          ),
+        ),
+        'crawled' => FALSE,
       ),
     ),
     'parser' => array(
@@ -300,6 +314,7 @@ function gsb_feature_migrate_feeds_importer_default() {
         'update_existing' => '2',
         'input_format' => 'panopoly_wysiwyg_text',
         'skip_hash_check' => 0,
+        'bundle' => 'image',
       ),
     ),
     'content_type' => '',
@@ -331,7 +346,7 @@ function gsb_feature_migrate_feeds_importer_default() {
           'auto' => '0',
           'xpath' => '',
           'url' => array(
-            'url_pattern' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_node.json?page=$index&pagesize=10&params[type]=newsmakers',
+            'url_pattern' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_node.json?page=$index&pagesize=10&param[type]=newsmakers',
             'initial' => '0',
             'increment' => '1',
           ),
@@ -430,17 +445,17 @@ function gsb_feature_migrate_feeds_importer_default() {
           ),
           6 => array(
             'source' => 'jsonpath_parser:6',
-            'target' => 'field_content_image:uri_no_download',
+            'target' => 'field_image_single_public:uri_no_download',
             'unique' => FALSE,
           ),
           7 => array(
             'source' => 'jsonpath_parser:7',
-            'target' => 'field_content_image:alt',
+            'target' => 'field_image_single_public:alt',
             'unique' => FALSE,
           ),
           8 => array(
             'source' => 'jsonpath_parser:8',
-            'target' => 'field_content_image:title',
+            'target' => 'field_image_single_public:title',
             'unique' => FALSE,
           ),
           9 => array(
@@ -450,12 +465,12 @@ function gsb_feature_migrate_feeds_importer_default() {
           ),
           10 => array(
             'source' => 'jsonpath_parser:10',
-            'target' => 'field_source_link:title',
+            'target' => 'field_link_single:title',
             'unique' => FALSE,
           ),
           11 => array(
             'source' => 'jsonpath_parser:11',
-            'target' => 'field_source_link:url',
+            'target' => 'field_link_single:url',
             'unique' => FALSE,
           ),
           12 => array(
@@ -497,7 +512,7 @@ function gsb_feature_migrate_feeds_importer_default() {
         'update_existing' => '2',
         'input_format' => 'panopoly_wysiwyg_text',
         'skip_hash_check' => 0,
-        'bundle' => 'gsb_media_mention',
+        'bundle' => 'media_mention',
       ),
     ),
     'content_type' => '',
@@ -529,7 +544,7 @@ function gsb_feature_migrate_feeds_importer_default() {
           'auto' => '0',
           'xpath' => '',
           'url' => array(
-            'url_pattern' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_node.json?page=$index&pagesize=50&params[type]=news',
+            'url_pattern' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_node.json?page=$index&pagesize=50&param[type]=news',
             'initial' => '0',
             'increment' => '1',
           ),
@@ -628,6 +643,192 @@ function gsb_feature_migrate_feeds_importer_default() {
     'process_in_background' => 0,
   );
   $export['news'] = $feeds_importer;
+
+  $feeds_importer = new stdClass();
+  $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
+  $feeds_importer->api_version = 1;
+  $feeds_importer->id = 'news_press_releases_to_news';
+  $feeds_importer->config = array(
+    'name' => 'News Press Releases to News',
+    'description' => 'News Press Releases to News migration',
+    'fetcher' => array(
+      'plugin_key' => 'FeedsCrawler',
+      'config' => array(
+        'auto_detect_feeds' => 0,
+        'use_pubsubhubbub' => 0,
+        'designated_hub' => '',
+        'crawler' => array(
+          'num_pages' => 0,
+          'delay' => '1',
+          'first_run' => '0',
+          'auto' => '0',
+          'xpath' => '',
+          'url' => array(
+            'url_pattern' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_node.json?page=$index&pagesize=10&param[type]=news&param[field_migration_category]=PR',
+            'initial' => '0',
+            'increment' => '1',
+          ),
+        ),
+        'crawled' => FALSE,
+        'request_timeout' => '',
+      ),
+    ),
+    'parser' => array(
+      'plugin_key' => 'FeedsJSONPathParser',
+      'config' => array(
+        'context' => '$.*',
+        'sources' => array(
+          'jsonpath_parser:0' => 'nid',
+          'jsonpath_parser:1' => 'title',
+          'jsonpath_parser:2' => 'body.und.*.value',
+          'jsonpath_parser:3' => 'field_date.und.*.value',
+          'jsonpath_parser:4' => 'field_news_teaser.und.*.value',
+          'jsonpath_parser:5' => 'created',
+          'jsonpath_parser:6' => 'status',
+          'jsonpath_parser:10' => 'field_news_image_caption.und.*.value',
+          'jsonpath_parser:11' => 'path',
+          'jsonpath_parser:12' => 'field_news_term_function.und.*.tid',
+          'jsonpath_parser:13' => 'field_news_term_industry.und.*.tid',
+          'jsonpath_parser:14' => 'field_news_term_region.und.*.tid',
+          'jsonpath_parser:15' => 'field_news_term_principle.und.*.tid',
+          'jsonpath_parser:16' => 'field_news_term_company.und.*.tid',
+          'jsonpath_parser:17' => 'field_news_term_tag.und.*.tid',
+          'jsonpath_parser:18' => 'field_news_image.und.*.uri',
+          'jsonpath_parser:19' => 'field_news_byline.und.*.value',
+          'jsonpath_parser:20' => '',
+        ),
+        'debug' => array(
+          'options' => array(
+            'context' => 0,
+            'jsonpath_parser:0' => 0,
+            'jsonpath_parser:1' => 0,
+            'jsonpath_parser:2' => 0,
+            'jsonpath_parser:3' => 0,
+            'jsonpath_parser:4' => 0,
+            'jsonpath_parser:5' => 0,
+            'jsonpath_parser:6' => 0,
+            'jsonpath_parser:10' => 0,
+            'jsonpath_parser:11' => 0,
+            'jsonpath_parser:12' => 0,
+            'jsonpath_parser:13' => 0,
+            'jsonpath_parser:14' => 0,
+            'jsonpath_parser:15' => 0,
+            'jsonpath_parser:16' => 0,
+            'jsonpath_parser:17' => 0,
+            'jsonpath_parser:18' => 0,
+            'jsonpath_parser:19' => 0,
+            'jsonpath_parser:20' => 0,
+          ),
+        ),
+      ),
+    ),
+    'processor' => array(
+      'plugin_key' => 'FeedsNodeProcessor',
+      'config' => array(
+        'expire' => '-1',
+        'author' => '1',
+        'authorize' => 1,
+        'mappings' => array(
+          0 => array(
+            'source' => 'jsonpath_parser:0',
+            'target' => 'nid',
+            'unique' => 1,
+          ),
+          1 => array(
+            'source' => 'jsonpath_parser:1',
+            'target' => 'title',
+            'unique' => FALSE,
+          ),
+          2 => array(
+            'source' => 'jsonpath_parser:2',
+            'target' => 'field_body',
+            'unique' => FALSE,
+          ),
+          3 => array(
+            'source' => 'jsonpath_parser:3',
+            'target' => 'field_date_published:start',
+            'unique' => FALSE,
+          ),
+          4 => array(
+            'source' => 'jsonpath_parser:4',
+            'target' => 'field_editorial_summary',
+            'unique' => FALSE,
+          ),
+          5 => array(
+            'source' => 'jsonpath_parser:5',
+            'target' => 'created',
+            'unique' => FALSE,
+          ),
+          6 => array(
+            'source' => 'jsonpath_parser:6',
+            'target' => 'status',
+            'unique' => FALSE,
+          ),
+          7 => array(
+            'source' => 'jsonpath_parser:10',
+            'target' => 'field_image_caption',
+            'unique' => FALSE,
+          ),
+          8 => array(
+            'source' => 'jsonpath_parser:11',
+            'target' => 'path_alias',
+            'unique' => FALSE,
+          ),
+          9 => array(
+            'source' => 'jsonpath_parser:12',
+            'target' => 'field_discipline',
+            'unique' => FALSE,
+          ),
+          10 => array(
+            'source' => 'jsonpath_parser:13',
+            'target' => 'field_industry',
+            'unique' => FALSE,
+          ),
+          11 => array(
+            'source' => 'jsonpath_parser:14',
+            'target' => 'field_region',
+            'unique' => FALSE,
+          ),
+          12 => array(
+            'source' => 'jsonpath_parser:15',
+            'target' => 'field_business_insight_topic',
+            'unique' => FALSE,
+          ),
+          13 => array(
+            'source' => 'jsonpath_parser:16',
+            'target' => 'field_company_organization',
+            'unique' => FALSE,
+          ),
+          14 => array(
+            'source' => 'jsonpath_parser:17',
+            'target' => 'field_tag',
+            'unique' => FALSE,
+          ),
+          15 => array(
+            'source' => 'jsonpath_parser:18',
+            'target' => 'field_file_single_public:uri_no_download',
+            'unique' => FALSE,
+          ),
+          16 => array(
+            'source' => 'Blank source 1',
+            'target' => 'field_news_type',
+            'unique' => FALSE,
+          ),
+        ),
+        'update_existing' => '2',
+        'input_format' => 'panopoly_wysiwyg_text',
+        'skip_hash_check' => 0,
+        'bundle' => 'news',
+      ),
+    ),
+    'content_type' => '',
+    'update' => 0,
+    'import_period' => '-1',
+    'expire_period' => 3600,
+    'import_on_create' => 1,
+    'process_in_background' => 0,
+  );
+  $export['news_press_releases_to_news'] = $feeds_importer;
 
   $feeds_importer = new stdClass();
   $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
@@ -839,8 +1040,8 @@ function gsb_feature_migrate_feeds_importer_default() {
   $feeds_importer->api_version = 1;
   $feeds_importer->id = 'news_to_school_story';
   $feeds_importer->config = array(
-    'name' => 'News to School Story',
-    'description' => 'News to School Story migration',
+    'name' => 'News School Story to News',
+    'description' => 'News School Story to News migration',
     'fetcher' => array(
       'plugin_key' => 'FeedsCrawler',
       'config' => array(
@@ -875,9 +1076,6 @@ function gsb_feature_migrate_feeds_importer_default() {
           'jsonpath_parser:4' => 'field_news_teaser.und.*.value',
           'jsonpath_parser:5' => 'created',
           'jsonpath_parser:6' => 'status',
-          'jsonpath_parser:7' => 'field_news_image.und.*.uri',
-          'jsonpath_parser:8' => 'field_news_image.und.*.title',
-          'jsonpath_parser:9' => 'field_news_image.und.*.alt',
           'jsonpath_parser:10' => 'field_news_image_caption.und.*.value',
           'jsonpath_parser:11' => 'path',
           'jsonpath_parser:12' => 'field_news_term_function.und.*.tid',
@@ -886,6 +1084,9 @@ function gsb_feature_migrate_feeds_importer_default() {
           'jsonpath_parser:15' => 'field_news_term_principle.und.*.tid',
           'jsonpath_parser:16' => 'field_news_term_company.und.*.tid',
           'jsonpath_parser:17' => 'field_news_term_tag.und.*.tid',
+          'jsonpath_parser:18' => 'field_news_image.und.*.uri',
+          'jsonpath_parser:19' => 'field_news_byline.und.*.value',
+          'jsonpath_parser:20' => '',
         ),
         'debug' => array(
           'options' => array(
@@ -897,9 +1098,6 @@ function gsb_feature_migrate_feeds_importer_default() {
             'jsonpath_parser:4' => 0,
             'jsonpath_parser:5' => 0,
             'jsonpath_parser:6' => 0,
-            'jsonpath_parser:7' => 0,
-            'jsonpath_parser:8' => 0,
-            'jsonpath_parser:9' => 0,
             'jsonpath_parser:10' => 0,
             'jsonpath_parser:11' => 0,
             'jsonpath_parser:12' => 0,
@@ -908,6 +1106,9 @@ function gsb_feature_migrate_feeds_importer_default() {
             'jsonpath_parser:15' => 0,
             'jsonpath_parser:16' => 0,
             'jsonpath_parser:17' => 0,
+            'jsonpath_parser:18' => 0,
+            'jsonpath_parser:19' => 0,
+            'jsonpath_parser:20' => 0,
           ),
         ),
       ),
@@ -931,7 +1132,7 @@ function gsb_feature_migrate_feeds_importer_default() {
           ),
           2 => array(
             'source' => 'jsonpath_parser:2',
-            'target' => 'body',
+            'target' => 'field_body',
             'unique' => FALSE,
           ),
           3 => array(
@@ -955,65 +1156,65 @@ function gsb_feature_migrate_feeds_importer_default() {
             'unique' => FALSE,
           ),
           7 => array(
-            'source' => 'jsonpath_parser:7',
-            'target' => 'field_header_image:uri_no_download',
+            'source' => 'jsonpath_parser:10',
+            'target' => 'field_image_caption',
             'unique' => FALSE,
           ),
           8 => array(
-            'source' => 'jsonpath_parser:8',
-            'target' => 'field_header_image:title',
-            'unique' => FALSE,
-          ),
-          9 => array(
-            'source' => 'jsonpath_parser:9',
-            'target' => 'field_header_image:alt',
-            'unique' => FALSE,
-          ),
-          10 => array(
-            'source' => 'jsonpath_parser:10',
-            'target' => 'field_header_image_caption',
-            'unique' => FALSE,
-          ),
-          11 => array(
             'source' => 'jsonpath_parser:11',
             'target' => 'path_alias',
             'unique' => FALSE,
           ),
-          12 => array(
+          9 => array(
             'source' => 'jsonpath_parser:12',
             'target' => 'field_discipline',
             'unique' => FALSE,
           ),
-          13 => array(
+          10 => array(
             'source' => 'jsonpath_parser:13',
             'target' => 'field_industry',
             'unique' => FALSE,
           ),
-          14 => array(
+          11 => array(
             'source' => 'jsonpath_parser:14',
             'target' => 'field_region',
             'unique' => FALSE,
           ),
-          15 => array(
+          12 => array(
             'source' => 'jsonpath_parser:15',
             'target' => 'field_business_insight_topic',
             'unique' => FALSE,
           ),
-          16 => array(
+          13 => array(
             'source' => 'jsonpath_parser:16',
             'target' => 'field_company_organization',
             'unique' => FALSE,
           ),
-          17 => array(
+          14 => array(
             'source' => 'jsonpath_parser:17',
             'target' => 'field_tag',
+            'unique' => FALSE,
+          ),
+          15 => array(
+            'source' => 'jsonpath_parser:18',
+            'target' => 'field_file_single_public:uri_no_download',
+            'unique' => FALSE,
+          ),
+          16 => array(
+            'source' => 'jsonpath_parser:19',
+            'target' => 'field_news_byline',
+            'unique' => FALSE,
+          ),
+          17 => array(
+            'source' => 'Blank source 1',
+            'target' => 'field_news_type',
             'unique' => FALSE,
           ),
         ),
         'update_existing' => '2',
         'input_format' => 'panopoly_wysiwyg_text',
         'skip_hash_check' => 0,
-        'bundle' => 'gsb_school_story',
+        'bundle' => 'news',
       ),
     ),
     'content_type' => '',
@@ -1045,7 +1246,7 @@ function gsb_feature_migrate_feeds_importer_default() {
           'auto' => '0',
           'xpath' => '',
           'url' => array(
-            'url_pattern' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_node.json?page=$index&pagesize=10&params[type]=ranking',
+            'url_pattern' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_node.json?page=$index&pagesize=10&param[type]=ranking',
             'initial' => '0',
             'increment' => '1',
           ),
@@ -1065,13 +1266,14 @@ function gsb_feature_migrate_feeds_importer_default() {
           'jsonpath_parser:3' => 'status',
           'jsonpath_parser:4' => 'created',
           'jsonpath_parser:5' => 'field_ranking_date.und.*.value',
-          'jsonpath_parser:6' => 'field_ranking_publication.und.*.uri',
           'jsonpath_parser:7' => 'field_news_term_principle.und.*.tid',
           'jsonpath_parser:8' => 'field_news_term_function.und.*.tid',
           'jsonpath_parser:9' => 'field_news_term_industry.und.*.tid',
           'jsonpath_parser:10' => 'field_news_term_region.und.*.tid',
           'jsonpath_parser:11' => 'field_news_term_company.und.*.tid',
           'jsonpath_parser:12' => 'field_news_term_tag.und.*.tid',
+          'jsonpath_parser:13' => 'field_ranking_article.und.*.title',
+          'jsonpath_parser:14' => 'field_ranking_article.und.*.url',
         ),
         'debug' => array(
           'options' => array(
@@ -1082,13 +1284,14 @@ function gsb_feature_migrate_feeds_importer_default() {
             'jsonpath_parser:3' => 0,
             'jsonpath_parser:4' => 0,
             'jsonpath_parser:5' => 0,
-            'jsonpath_parser:6' => 0,
             'jsonpath_parser:7' => 0,
             'jsonpath_parser:8' => 0,
             'jsonpath_parser:9' => 0,
             'jsonpath_parser:10' => 0,
             'jsonpath_parser:11' => 0,
             'jsonpath_parser:12' => 0,
+            'jsonpath_parser:13' => 0,
+            'jsonpath_parser:14' => 0,
           ),
         ),
       ),
@@ -1131,45 +1334,50 @@ function gsb_feature_migrate_feeds_importer_default() {
             'unique' => FALSE,
           ),
           6 => array(
-            'source' => 'jsonpath_parser:6',
-            'target' => 'field_source_publication',
-            'unique' => FALSE,
-          ),
-          7 => array(
             'source' => 'jsonpath_parser:7',
             'target' => 'field_business_insight_topic',
             'unique' => FALSE,
           ),
-          8 => array(
+          7 => array(
             'source' => 'jsonpath_parser:8',
             'target' => 'field_discipline',
             'unique' => FALSE,
           ),
-          9 => array(
+          8 => array(
             'source' => 'jsonpath_parser:9',
             'target' => 'field_industry',
             'unique' => FALSE,
           ),
-          10 => array(
+          9 => array(
             'source' => 'jsonpath_parser:10',
             'target' => 'field_region',
             'unique' => FALSE,
           ),
-          11 => array(
+          10 => array(
             'source' => 'jsonpath_parser:11',
             'target' => 'field_company_organization',
             'unique' => FALSE,
           ),
-          12 => array(
+          11 => array(
             'source' => 'jsonpath_parser:12',
             'target' => 'field_tag',
+            'unique' => FALSE,
+          ),
+          12 => array(
+            'source' => 'jsonpath_parser:13',
+            'target' => 'field_link_single:title',
+            'unique' => FALSE,
+          ),
+          13 => array(
+            'source' => 'jsonpath_parser:14',
+            'target' => 'field_link_single:url',
             'unique' => FALSE,
           ),
         ),
         'update_existing' => '2',
         'input_format' => 'panopoly_wysiwyg_text',
         'skip_hash_check' => 0,
-        'bundle' => 'gsb_media_mention',
+        'bundle' => 'media_mention',
       ),
     ),
     'content_type' => '',
