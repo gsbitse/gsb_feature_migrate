@@ -1,11 +1,10 @@
 <?php
+
 /**
  * @file
  * Code for the GSB Feature Migrate feature.
  */
-
 include_once 'gsb_feature_migrate.features.inc';
-
 
 /**
  * Implements hook_ctools_plugin_directory().
@@ -30,6 +29,16 @@ function gsb_feature_migrate_feeds_processor_targets_alter(&$targets, $entity_ty
         'name' => t('@label: URI without download', array('@label' => $instance['label'])),
         'callback' => 'gsb_feature_migrate_image_feeds_set_target',
         'description' => t('The URI of the @label field.', array('@label' => $instance['label'])),
+        'real_target' => $name,
+      );
+    }
+
+    // Target for Affiliations field_collection.
+    if ($name == 'field_affilitations') {
+      $targets[$name] = array(
+        'name' => t('Field Collection: @label', array('@label' => $instance['label'])),
+        'callback' => 'gsb_feature_migrate_field_affilitations_feeds_set_target',
+        'description' => t('Field Collection object of @label field.', array('@label' => $instance['label'])),
         'real_target' => $name,
       );
     }
@@ -76,6 +85,35 @@ function gsb_feature_migrate_image_feeds_set_target($source, $entity, $target, $
   }
 
   $entity->$field_name = $field;
+}
+
+/**
+ * Callback for field_affiliations target.
+ */
+function gsb_feature_migrate_field_affilitations_feeds_set_target($source, $entity, $target, $value) {
+  if (empty($value)) {
+    return;
+  }
+
+  // Make sure $value is an array.
+  if (!is_array($value)) {
+    $value = array($value);
+  }
+
+  foreach ($value as $k => $v) {
+    $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_affilitations'));
+    $field_collection_item->setHostEntity('node', $entity);
+    $emw = entity_metadata_wrapper('field_collection_item', $field_collection_item);
+    $emw->field_affiliations_position->set($v['field_affiliation_type'][LANGUAGE_NONE][0]['value']);
+    $emw->field_link_single->set(array(
+      'title' => $v['field_organization_name'][LANGUAGE_NONE][0]['value'],
+      'url' => $v['field_organization_url'][LANGUAGE_NONE][0]['url']
+    ));
+    $emw->field_year_range->set(array(
+      'value' => date('Y-m-d', strtotime($v['field_year_from'][LANGUAGE_NONE][0]['value'])),
+      'value2' => date('Y-m-d', strtotime($v['field_year_to'][LANGUAGE_NONE][0]['value'])),
+    ));
+  }
 }
 
 /**
