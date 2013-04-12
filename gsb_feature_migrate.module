@@ -95,8 +95,8 @@ function gsb_feature_migrate_field_affilitations_feeds_set_target($source, $enti
     return;
   }
 
-  // Make sure $value is an array.
-  if (!is_array($value)) {
+  // Make sure $value is an array of field_collection item arrays.
+  if (is_array($value) && isset($value['item_id'])) {
     $value = array($value);
   }
 
