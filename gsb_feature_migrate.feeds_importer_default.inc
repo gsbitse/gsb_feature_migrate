@@ -218,6 +218,221 @@ function gsb_feature_migrate_feeds_importer_default() {
   $feeds_importer = new stdClass();
   $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
   $feeds_importer->api_version = 1;
+  $feeds_importer->id = 'faculty';
+  $feeds_importer->config = array(
+    'name' => 'Faculty',
+    'description' => 'Faculty migration',
+    'fetcher' => array(
+      'plugin_key' => 'FeedsCrawler',
+      'config' => array(
+        'auto_detect_feeds' => 0,
+        'use_pubsubhubbub' => 0,
+        'designated_hub' => '',
+        'crawler' => array(
+          'num_pages' => 0,
+          'delay' => '1',
+          'first_run' => '0',
+          'auto' => '0',
+          'xpath' => '',
+          'url' => array(
+            'url_pattern' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_node.json?page=$index&pagesize=10&param[type]=news&param[field_migration_category]=SS',
+            'initial' => '0',
+            'increment' => '1',
+          ),
+        ),
+        'crawled' => FALSE,
+        'request_timeout' => '',
+      ),
+    ),
+    'parser' => array(
+      'plugin_key' => 'FeedsJSONPathParser',
+      'config' => array(
+        'context' => '$.*',
+        'sources' => array(
+          'jsonpath_parser:1' => 'title',
+          'jsonpath_parser:2' => 'field_bio.und.*.value',
+          'jsonpath_parser:5' => 'created',
+          'jsonpath_parser:7' => 'field_affiliation.und.*',
+          'jsonpath_parser:8' => 'field_name_over_ride.und.*.field_salutation.und.*.value',
+          'jsonpath_parser:9' => 'first_name',
+          'jsonpath_parser:10' => 'middlename',
+          'jsonpath_parser:11' => 'last_name',
+          'jsonpath_parser:12' => 'field_title_academic.und.*.value',
+          'jsonpath_parser:13' => 'field_official_rank.und.*.value',
+          'jsonpath_parser:14' => '',
+          'jsonpath_parser:16' => 'field_cv_upload.und.*.uri',
+          'jsonpath_parser:17' => 'field_teaching_research.und.*.value',
+          'jsonpath_parser:18' => 'field_research_areas.und.*.value',
+          'jsonpath_parser:19' => '',
+          'jsonpath_parser:20' => '',
+          'jsonpath_parser:21' => '',
+          'jsonpath_parser:22' => 'field_academic_department.und.*.tid',
+          'jsonpath_parser:23' => 'field_other_academic_department.und.*.tid',
+          'jsonpath_parser:24' => 'field_awards_honors.und.*.field_award_name.und.*.value',
+        ),
+        'debug' => array(
+          'options' => array(
+            'context' => 0,
+            'jsonpath_parser:1' => 0,
+            'jsonpath_parser:2' => 0,
+            'jsonpath_parser:5' => 0,
+            'jsonpath_parser:7' => 0,
+            'jsonpath_parser:8' => 0,
+            'jsonpath_parser:9' => 0,
+            'jsonpath_parser:10' => 0,
+            'jsonpath_parser:11' => 0,
+            'jsonpath_parser:12' => 0,
+            'jsonpath_parser:13' => 0,
+            'jsonpath_parser:14' => 0,
+            'jsonpath_parser:16' => 0,
+            'jsonpath_parser:17' => 0,
+            'jsonpath_parser:18' => 0,
+            'jsonpath_parser:19' => 0,
+            'jsonpath_parser:20' => 0,
+            'jsonpath_parser:21' => 0,
+            'jsonpath_parser:22' => 0,
+            'jsonpath_parser:23' => 0,
+            'jsonpath_parser:24' => 0,
+          ),
+        ),
+      ),
+    ),
+    'processor' => array(
+      'plugin_key' => 'FeedsNodeProcessor',
+      'config' => array(
+        'expire' => '-1',
+        'author' => '1',
+        'authorize' => 1,
+        'mappings' => array(
+          0 => array(
+            'source' => 'jsonpath_parser:1',
+            'target' => 'title',
+            'unique' => FALSE,
+          ),
+          1 => array(
+            'source' => 'jsonpath_parser:2',
+            'target' => 'field_body',
+            'unique' => FALSE,
+          ),
+          2 => array(
+            'source' => 'jsonpath_parser:5',
+            'target' => 'created',
+            'unique' => FALSE,
+          ),
+          3 => array(
+            'source' => 'jsonpath_parser:7',
+            'target' => 'field_affilitations',
+            'unique' => FALSE,
+          ),
+          4 => array(
+            'source' => 'jsonpath_parser:8',
+            'target' => 'field_salutation',
+            'unique' => FALSE,
+          ),
+          5 => array(
+            'source' => 'jsonpath_parser:9',
+            'target' => 'field_first_name',
+            'unique' => FALSE,
+          ),
+          6 => array(
+            'source' => 'jsonpath_parser:10',
+            'target' => 'field_middle_name',
+            'unique' => FALSE,
+          ),
+          7 => array(
+            'source' => 'jsonpath_parser:11',
+            'target' => 'field_last_name',
+            'unique' => FALSE,
+          ),
+          8 => array(
+            'source' => 'jsonpath_parser:12',
+            'target' => 'field_title_position_unlimited',
+            'unique' => FALSE,
+          ),
+          9 => array(
+            'source' => 'jsonpath_parser:13',
+            'target' => 'field_rank',
+            'unique' => FALSE,
+          ),
+          10 => array(
+            'source' => 'jsonpath_parser:14',
+            'target' => 'field_leave_status',
+            'unique' => FALSE,
+          ),
+          11 => array(
+            'source' => 'jsonpath_parser:16',
+            'target' => 'field_file_single_public:uri_no_download',
+            'unique' => FALSE,
+          ),
+          12 => array(
+            'source' => 'jsonpath_parser:17',
+            'target' => 'field_research_statement',
+            'unique' => FALSE,
+          ),
+          13 => array(
+            'source' => 'jsonpath_parser:18',
+            'target' => 'field_research_interests',
+            'unique' => FALSE,
+          ),
+          14 => array(
+            'source' => 'jsonpath_parser:19',
+            'target' => 'field_talks_conferences:url',
+            'unique' => FALSE,
+          ),
+          15 => array(
+            'source' => 'jsonpath_parser:20',
+            'target' => 'field_talks_conferences:title',
+            'unique' => FALSE,
+          ),
+          16 => array(
+            'source' => 'jsonpath_parser:21',
+            'target' => 'field_professional_experience',
+            'unique' => FALSE,
+          ),
+          17 => array(
+            'source' => 'jsonpath_parser:22',
+            'target' => 'field_academic_area_single',
+            'unique' => FALSE,
+          ),
+          18 => array(
+            'source' => 'jsonpath_parser:23',
+            'target' => 'field_academic_area_unlimited',
+            'unique' => FALSE,
+          ),
+          19 => array(
+            'source' => 'Blank source 1',
+            'target' => 'guid',
+            'unique' => 1,
+          ),
+          20 => array(
+            'source' => 'Blank source 2',
+            'target' => 'status',
+            'unique' => FALSE,
+          ),
+          21 => array(
+            'source' => 'jsonpath_parser:24',
+            'target' => 'field_awards_honors',
+            'unique' => FALSE,
+          ),
+        ),
+        'update_existing' => '2',
+        'input_format' => 'panopoly_wysiwyg_text',
+        'skip_hash_check' => 0,
+        'bundle' => 'faculty',
+      ),
+    ),
+    'content_type' => '',
+    'update' => 0,
+    'import_period' => '-1',
+    'expire_period' => 3600,
+    'import_on_create' => 1,
+    'process_in_background' => 0,
+  );
+  $export['faculty'] = $feeds_importer;
+
+  $feeds_importer = new stdClass();
+  $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
+  $feeds_importer->api_version = 1;
   $feeds_importer->id = 'files';
   $feeds_importer->config = array(
     'name' => 'Files',
