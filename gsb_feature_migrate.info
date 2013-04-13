@@ -25,6 +25,7 @@ features[feeds_importer][] = news_press_releases_to_news
 features[feeds_importer][] = news_to_business_insight
 features[feeds_importer][] = news_to_school_story
 features[feeds_importer][] = ranking_to_media_mention
+features[feeds_importer][] = research_papers
 features[feeds_tamper][] = business_insights-jsonpath_parser_2-file_id_replace
 features[feeds_tamper][] = faculty-blank_source_1-rewrite
 features[feeds_tamper][] = faculty-blank_source_2-set_default_value
