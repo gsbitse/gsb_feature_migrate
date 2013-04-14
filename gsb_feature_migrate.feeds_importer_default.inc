@@ -1484,8 +1484,8 @@ function gsb_feature_migrate_feeds_importer_default() {
           'jsonpath_parser:10' => 'field_news_term_region.und.*.tid',
           'jsonpath_parser:11' => 'field_news_term_company.und.*.tid',
           'jsonpath_parser:12' => 'field_news_term_tag.und.*.tid',
-          'jsonpath_parser:13' => 'field_ranking_article.und.*.title',
           'jsonpath_parser:14' => 'field_ranking_article.und.*.url',
+          'jsonpath_parser:15' => 'field_ranking_publication.und.*.value',
         ),
         'debug' => array(
           'options' => array(
@@ -1502,8 +1502,8 @@ function gsb_feature_migrate_feeds_importer_default() {
             'jsonpath_parser:10' => 0,
             'jsonpath_parser:11' => 0,
             'jsonpath_parser:12' => 0,
-            'jsonpath_parser:13' => 0,
             'jsonpath_parser:14' => 0,
+            'jsonpath_parser:15' => 0,
           ),
         ),
       ),
@@ -1576,13 +1576,13 @@ function gsb_feature_migrate_feeds_importer_default() {
             'unique' => FALSE,
           ),
           12 => array(
-            'source' => 'jsonpath_parser:13',
-            'target' => 'field_link_single:title',
+            'source' => 'jsonpath_parser:14',
+            'target' => 'field_link_single:url',
             'unique' => FALSE,
           ),
           13 => array(
-            'source' => 'jsonpath_parser:14',
-            'target' => 'field_link_single:url',
+            'source' => 'jsonpath_parser:15',
+            'target' => 'field_publisher',
             'unique' => FALSE,
           ),
         ),
