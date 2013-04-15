@@ -27,6 +27,20 @@ function gsb_feature_migrate_feeds_tamper_default() {
   $feeds_tamper = new stdClass();
   $feeds_tamper->disabled = FALSE; /* Edit this to true to make a default feeds_tamper disabled initially */
   $feeds_tamper->api_version = 2;
+  $feeds_tamper->id = 'business_insights-jsonpath_parser_4-strip_tags';
+  $feeds_tamper->importer = 'business_insights';
+  $feeds_tamper->source = 'jsonpath_parser:4';
+  $feeds_tamper->plugin_id = 'strip_tags';
+  $feeds_tamper->settings = array(
+    'allowed_tags' => '',
+  );
+  $feeds_tamper->weight = 0;
+  $feeds_tamper->description = 'Strip tags';
+  $export['business_insights-jsonpath_parser_4-strip_tags'] = $feeds_tamper;
+
+  $feeds_tamper = new stdClass();
+  $feeds_tamper->disabled = FALSE; /* Edit this to true to make a default feeds_tamper disabled initially */
+  $feeds_tamper->api_version = 2;
   $feeds_tamper->id = 'faculty-blank_source_1-rewrite';
   $feeds_tamper->importer = 'faculty';
   $feeds_tamper->source = 'Blank source 1';
@@ -65,6 +79,20 @@ function gsb_feature_migrate_feeds_tamper_default() {
   $feeds_tamper->weight = 0;
   $feeds_tamper->description = 'Full name';
   $export['faculty-jsonpath_parser_1-rewrite'] = $feeds_tamper;
+
+  $feeds_tamper = new stdClass();
+  $feeds_tamper->disabled = FALSE; /* Edit this to true to make a default feeds_tamper disabled initially */
+  $feeds_tamper->api_version = 2;
+  $feeds_tamper->id = 'media_mention-jsonpath_parser_12-strip_tags';
+  $feeds_tamper->importer = 'media_mention';
+  $feeds_tamper->source = 'jsonpath_parser:12';
+  $feeds_tamper->plugin_id = 'strip_tags';
+  $feeds_tamper->settings = array(
+    'allowed_tags' => '',
+  );
+  $feeds_tamper->weight = 0;
+  $feeds_tamper->description = 'Strip tags';
+  $export['media_mention-jsonpath_parser_12-strip_tags'] = $feeds_tamper;
 
   $feeds_tamper = new stdClass();
   $feeds_tamper->disabled = FALSE; /* Edit this to true to make a default feeds_tamper disabled initially */
@@ -111,6 +139,20 @@ function gsb_feature_migrate_feeds_tamper_default() {
   $feeds_tamper = new stdClass();
   $feeds_tamper->disabled = FALSE; /* Edit this to true to make a default feeds_tamper disabled initially */
   $feeds_tamper->api_version = 2;
+  $feeds_tamper->id = 'news_press_releases_to_news-jsonpath_parser_4-strip_tags';
+  $feeds_tamper->importer = 'news_press_releases_to_news';
+  $feeds_tamper->source = 'jsonpath_parser:4';
+  $feeds_tamper->plugin_id = 'strip_tags';
+  $feeds_tamper->settings = array(
+    'allowed_tags' => '',
+  );
+  $feeds_tamper->weight = 0;
+  $feeds_tamper->description = 'Strip tags';
+  $export['news_press_releases_to_news-jsonpath_parser_4-strip_tags'] = $feeds_tamper;
+
+  $feeds_tamper = new stdClass();
+  $feeds_tamper->disabled = FALSE; /* Edit this to true to make a default feeds_tamper disabled initially */
+  $feeds_tamper->api_version = 2;
   $feeds_tamper->id = 'news_to_business_insight-jsonpath_parser_2-file_id_replace';
   $feeds_tamper->importer = 'news_to_business_insight';
   $feeds_tamper->source = 'jsonpath_parser:2';
@@ -121,6 +163,20 @@ function gsb_feature_migrate_feeds_tamper_default() {
   $feeds_tamper->weight = 0;
   $feeds_tamper->description = 'File ID replace';
   $export['news_to_business_insight-jsonpath_parser_2-file_id_replace'] = $feeds_tamper;
+
+  $feeds_tamper = new stdClass();
+  $feeds_tamper->disabled = FALSE; /* Edit this to true to make a default feeds_tamper disabled initially */
+  $feeds_tamper->api_version = 2;
+  $feeds_tamper->id = 'news_to_business_insight-jsonpath_parser_4-strip_tags';
+  $feeds_tamper->importer = 'news_to_business_insight';
+  $feeds_tamper->source = 'jsonpath_parser:4';
+  $feeds_tamper->plugin_id = 'strip_tags';
+  $feeds_tamper->settings = array(
+    'allowed_tags' => '',
+  );
+  $feeds_tamper->weight = 0;
+  $feeds_tamper->description = 'Strip tags';
+  $export['news_to_business_insight-jsonpath_parser_4-strip_tags'] = $feeds_tamper;
 
   $feeds_tamper = new stdClass();
   $feeds_tamper->disabled = FALSE; /* Edit this to true to make a default feeds_tamper disabled initially */
@@ -149,6 +205,20 @@ function gsb_feature_migrate_feeds_tamper_default() {
   $feeds_tamper->weight = 0;
   $feeds_tamper->description = 'File ID replace';
   $export['news_to_school_story-jsonpath_parser_2-file_id_replace'] = $feeds_tamper;
+
+  $feeds_tamper = new stdClass();
+  $feeds_tamper->disabled = FALSE; /* Edit this to true to make a default feeds_tamper disabled initially */
+  $feeds_tamper->api_version = 2;
+  $feeds_tamper->id = 'news_to_school_story-jsonpath_parser_4-strip_tags';
+  $feeds_tamper->importer = 'news_to_school_story';
+  $feeds_tamper->source = 'jsonpath_parser:4';
+  $feeds_tamper->plugin_id = 'strip_tags';
+  $feeds_tamper->settings = array(
+    'allowed_tags' => '',
+  );
+  $feeds_tamper->weight = 0;
+  $feeds_tamper->description = 'Strip tags';
+  $export['news_to_school_story-jsonpath_parser_4-strip_tags'] = $feeds_tamper;
 
   return $export;
 }
