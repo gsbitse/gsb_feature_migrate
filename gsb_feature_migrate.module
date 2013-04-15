@@ -74,14 +74,18 @@ function gsb_feature_migrate_image_feeds_set_target($source, $entity, $target, $
       break;
     }
 
-    // Init file array.
-    $field[LANGUAGE_NONE][$delta] = isset($field[LANGUAGE_NONE][$delta]) ? $field[LANGUAGE_NONE][$delta] : array();
-
     $file = file_uri_to_object($v);
-    $field[LANGUAGE_NONE][$delta] += (array) $file;
-    $field[LANGUAGE_NONE][$delta]['display'] = 1;
 
-    $delta++;
+    if (isset($file->fid)) {
+      // Init file array.
+      $field[LANGUAGE_NONE][$delta] = isset($field[LANGUAGE_NONE][$delta]) ? $field[LANGUAGE_NONE][$delta] : array();
+      $field[LANGUAGE_NONE][$delta] += (array) $file;
+      $field[LANGUAGE_NONE][$delta]['display'] = 1;
+      $delta++;
+    }
+    else {
+      watchdog('gsb_migration', t("File :uri doesn't exist. It was skipped.", array(':uri' => $file->uri)));
+    }
   }
 
   $entity->$field_name = $field;

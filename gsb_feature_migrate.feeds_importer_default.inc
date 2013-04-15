@@ -1143,7 +1143,7 @@ function gsb_feature_migrate_feeds_importer_default() {
           ),
           2 => array(
             'source' => 'jsonpath_parser:2',
-            'target' => 'body',
+            'target' => 'field_body',
             'unique' => FALSE,
           ),
           3 => array(
@@ -1158,22 +1158,22 @@ function gsb_feature_migrate_feeds_importer_default() {
           ),
           5 => array(
             'source' => 'jsonpath_parser:5',
-            'target' => 'field_content_image:uri_no_download',
+            'target' => 'field_file_single_public:uri_no_download',
             'unique' => FALSE,
           ),
           6 => array(
             'source' => 'jsonpath_parser:6',
-            'target' => 'field_content_image:title',
+            'target' => 'field_file_single_public:title',
             'unique' => FALSE,
           ),
           7 => array(
             'source' => 'jsonpath_parser:7',
-            'target' => 'field_content_image:alt',
+            'target' => 'field_file_single_public:alt',
             'unique' => FALSE,
           ),
           8 => array(
             'source' => 'jsonpath_parser:8',
-            'target' => 'field_content_image_caption',
+            'target' => 'field_image_caption',
             'unique' => FALSE,
           ),
           9 => array(
