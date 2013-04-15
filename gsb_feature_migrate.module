@@ -42,6 +42,15 @@ function gsb_feature_migrate_feeds_processor_targets_alter(&$targets, $entity_ty
         'real_target' => $name,
       );
     }
+    // Target for Authors field_collection.
+    if ($name == 'field_person_fac_staff_other') {
+      $targets[$name . ':first_name'] = array(
+        'name' => t('Field Collection: @label -> First Name', array('@label' => $instance['label'])),
+        'callback' => 'gsb_feature_migrate_field_person_fac_staff_other_feeds_set_target',
+        'description' => t('Field Collection object of @label field.', array('@label' => $instance['label'])),
+        'real_target' => $name,
+      );
+    }
   }
 }
 
@@ -118,6 +127,28 @@ function gsb_feature_migrate_field_affilitations_feeds_set_target($source, $enti
       'value2' => date('Y-m-d', strtotime($v['field_year_to'][LANGUAGE_NONE][0]['value'])),
     ));
   }
+}
+
+/**
+ * Callback for field_person_fac_staff_other target.
+ */
+function gsb_feature_migrate_field_person_fac_staff_other_feeds_set_target($source, $entity, $target, $value) {
+  if (empty($value)) {
+    return;
+  }
+
+  // Create field_collection_item if empty.
+  if (empty($entity->field_person_fac_staff_other)) {
+    $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_person_fac_staff_other'));
+    $field_collection_item->setHostEntity('node', $entity);
+  }
+  else {
+    $field_collection_item = field_collection_item_load($entity->field_person_fac_staff_other[LANGUAGE_NONE][0]['value']);
+  }
+
+  $emw = entity_metadata_wrapper('field_collection_item', $field_collection_item);
+  $emw->field_person_or_other->set('Other');
+  $emw->field_first_name->set($value);
 }
 
 /**

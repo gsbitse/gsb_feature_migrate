@@ -1082,11 +1082,7 @@ function gsb_feature_migrate_feeds_importer_default() {
           'jsonpath_parser:3' => 'field_date.und.*.value',
           'jsonpath_parser:4' => 'field_news_teaser.und.*.value',
           'jsonpath_parser:5' => 'field_news_image.und.*.uri',
-          'jsonpath_parser:6' => 'field_news_image.und.*.title',
-          'jsonpath_parser:7' => 'field_news_image.und.*.alt',
           'jsonpath_parser:8' => 'field_news_image_caption.und.*.value',
-          'jsonpath_parser:9' => 'field_news_rlink.und.*.title',
-          'jsonpath_parser:10' => 'field_news_rlink.und.*.url',
           'jsonpath_parser:11' => 'path',
           'jsonpath_parser:12' => 'created',
           'jsonpath_parser:13' => 'status',
@@ -1096,6 +1092,7 @@ function gsb_feature_migrate_feeds_importer_default() {
           'jsonpath_parser:17' => 'field_news_term_industry.und.*.tid',
           'jsonpath_parser:18' => 'field_news_term_company.und.*.tid',
           'jsonpath_parser:19' => 'field_news_term_tag.und.*.tid',
+          'jsonpath_parser:20' => 'field_news_byline.und.*.value',
         ),
         'debug' => array(
           'options' => array(
@@ -1106,11 +1103,7 @@ function gsb_feature_migrate_feeds_importer_default() {
             'jsonpath_parser:3' => 0,
             'jsonpath_parser:4' => 0,
             'jsonpath_parser:5' => 0,
-            'jsonpath_parser:6' => 0,
-            'jsonpath_parser:7' => 0,
             'jsonpath_parser:8' => 0,
-            'jsonpath_parser:9' => 0,
-            'jsonpath_parser:10' => 0,
             'jsonpath_parser:11' => 0,
             'jsonpath_parser:12' => 0,
             'jsonpath_parser:13' => 0,
@@ -1120,6 +1113,7 @@ function gsb_feature_migrate_feeds_importer_default() {
             'jsonpath_parser:17' => 0,
             'jsonpath_parser:18' => 0,
             'jsonpath_parser:19' => 0,
+            'jsonpath_parser:20' => 0,
           ),
         ),
       ),
@@ -1162,73 +1156,58 @@ function gsb_feature_migrate_feeds_importer_default() {
             'unique' => FALSE,
           ),
           6 => array(
-            'source' => 'jsonpath_parser:6',
-            'target' => 'field_file_single_public:title',
-            'unique' => FALSE,
-          ),
-          7 => array(
-            'source' => 'jsonpath_parser:7',
-            'target' => 'field_file_single_public:alt',
-            'unique' => FALSE,
-          ),
-          8 => array(
             'source' => 'jsonpath_parser:8',
             'target' => 'field_image_caption',
             'unique' => FALSE,
           ),
-          9 => array(
-            'source' => 'jsonpath_parser:9',
-            'target' => 'field_related_links:title',
-            'unique' => FALSE,
-          ),
-          10 => array(
-            'source' => 'jsonpath_parser:10',
-            'target' => 'field_related_links:url',
-            'unique' => FALSE,
-          ),
-          11 => array(
+          7 => array(
             'source' => 'jsonpath_parser:11',
             'target' => 'path_alias',
             'unique' => FALSE,
           ),
-          12 => array(
+          8 => array(
             'source' => 'jsonpath_parser:12',
             'target' => 'created',
             'unique' => FALSE,
           ),
-          13 => array(
+          9 => array(
             'source' => 'jsonpath_parser:13',
             'target' => 'status',
             'unique' => FALSE,
           ),
-          14 => array(
+          10 => array(
             'source' => 'jsonpath_parser:14',
             'target' => 'field_business_insight_topic',
             'unique' => FALSE,
           ),
-          15 => array(
+          11 => array(
             'source' => 'jsonpath_parser:15',
             'target' => 'field_discipline',
             'unique' => FALSE,
           ),
-          16 => array(
+          12 => array(
             'source' => 'jsonpath_parser:16',
             'target' => 'field_region',
             'unique' => FALSE,
           ),
-          17 => array(
+          13 => array(
             'source' => 'jsonpath_parser:17',
             'target' => 'field_industry',
             'unique' => FALSE,
           ),
-          18 => array(
+          14 => array(
             'source' => 'jsonpath_parser:18',
             'target' => 'field_company_organization',
             'unique' => FALSE,
           ),
-          19 => array(
+          15 => array(
             'source' => 'jsonpath_parser:19',
             'target' => 'field_tag',
+            'unique' => FALSE,
+          ),
+          16 => array(
+            'source' => 'jsonpath_parser:20',
+            'target' => 'field_person_fac_staff_other:first_name',
             'unique' => FALSE,
           ),
         ),

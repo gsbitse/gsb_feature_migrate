@@ -1,11 +1,12 @@
 name = GSB Feature Migrate
 description = GSB Feeds Importers and plugins.
 core = 7.x
-package = Feeds
+package = GSB
 php = 5.2.4
 version = 7.x-1.0
 project = gsb_feature_migrate
 dependencies[] = ctools
+dependencies[] = entity
 dependencies[] = feeds
 dependencies[] = feeds_crawler
 dependencies[] = feeds_file
