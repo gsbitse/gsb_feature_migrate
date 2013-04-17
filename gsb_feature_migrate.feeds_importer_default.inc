@@ -1399,6 +1399,141 @@ function gsb_feature_migrate_feeds_importer_default() {
   $feeds_importer = new stdClass();
   $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
   $feeds_importer->api_version = 1;
+  $feeds_importer->id = 'publications';
+  $feeds_importer->config = array(
+    'name' => 'Publications',
+    'description' => 'Publications migration.',
+    'fetcher' => array(
+      'plugin_key' => 'FeedsCrawler',
+      'config' => array(
+        'auto_detect_feeds' => 0,
+        'use_pubsubhubbub' => 0,
+        'designated_hub' => '',
+        'crawler' => array(
+          'num_pages' => 0,
+          'delay' => '1',
+          'first_run' => '0',
+          'auto' => '0',
+          'xpath' => '',
+          'url' => array(
+            'url_pattern' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_node.json?page=$index&pagesize=10&param[type]=publication',
+            'initial' => '0',
+            'increment' => '1',
+          ),
+        ),
+        'crawled' => FALSE,
+        'request_timeout' => '',
+      ),
+    ),
+    'parser' => array(
+      'plugin_key' => 'FeedsJSONPathParser',
+      'config' => array(
+        'context' => '$.*',
+        'sources' => array(
+          'jsonpath_parser:0' => 'nid',
+          'jsonpath_parser:1' => 'title',
+          'jsonpath_parser:2' => 'body.und.*.value',
+          'jsonpath_parser:3' => 'field_year_published.und.*.value',
+          'jsonpath_parser:5' => 'created',
+          'jsonpath_parser:6' => 'status',
+          'jsonpath_parser:11' => 'path',
+          'jsonpath_parser:21' => 'field_publication_title.und.*.value',
+          'jsonpath_parser:22' => 'field_publication_url.und.*.value',
+          'jsonpath_parser:23' => 'field_publisher.und.*.value',
+        ),
+        'debug' => array(
+          'options' => array(
+            'context' => 0,
+            'jsonpath_parser:0' => 0,
+            'jsonpath_parser:1' => 0,
+            'jsonpath_parser:2' => 0,
+            'jsonpath_parser:3' => 0,
+            'jsonpath_parser:5' => 0,
+            'jsonpath_parser:6' => 0,
+            'jsonpath_parser:11' => 0,
+            'jsonpath_parser:21' => 0,
+            'jsonpath_parser:22' => 0,
+            'jsonpath_parser:23' => 0,
+          ),
+        ),
+      ),
+    ),
+    'processor' => array(
+      'plugin_key' => 'FeedsNodeProcessor',
+      'config' => array(
+        'expire' => '-1',
+        'author' => '1',
+        'authorize' => 1,
+        'mappings' => array(
+          0 => array(
+            'source' => 'jsonpath_parser:0',
+            'target' => 'nid',
+            'unique' => 1,
+          ),
+          1 => array(
+            'source' => 'jsonpath_parser:1',
+            'target' => 'title',
+            'unique' => FALSE,
+          ),
+          2 => array(
+            'source' => 'jsonpath_parser:2',
+            'target' => 'field_body',
+            'unique' => FALSE,
+          ),
+          3 => array(
+            'source' => 'jsonpath_parser:3',
+            'target' => 'field_date_published:start',
+            'unique' => FALSE,
+          ),
+          4 => array(
+            'source' => 'jsonpath_parser:5',
+            'target' => 'created',
+            'unique' => FALSE,
+          ),
+          5 => array(
+            'source' => 'jsonpath_parser:6',
+            'target' => 'status',
+            'unique' => FALSE,
+          ),
+          6 => array(
+            'source' => 'jsonpath_parser:11',
+            'target' => 'path_alias',
+            'unique' => FALSE,
+          ),
+          7 => array(
+            'source' => 'jsonpath_parser:21',
+            'target' => 'field_link_website:title',
+            'unique' => FALSE,
+          ),
+          8 => array(
+            'source' => 'jsonpath_parser:22',
+            'target' => 'field_link_website:url',
+            'unique' => FALSE,
+          ),
+          9 => array(
+            'source' => 'jsonpath_parser:23',
+            'target' => 'field_publisher',
+            'unique' => FALSE,
+          ),
+        ),
+        'update_existing' => '2',
+        'input_format' => 'panopoly_wysiwyg_text',
+        'skip_hash_check' => 0,
+        'bundle' => 'publication',
+      ),
+    ),
+    'content_type' => '',
+    'update' => 0,
+    'import_period' => '-1',
+    'expire_period' => 3600,
+    'import_on_create' => 1,
+    'process_in_background' => 0,
+  );
+  $export['publications'] = $feeds_importer;
+
+  $feeds_importer = new stdClass();
+  $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
+  $feeds_importer->api_version = 1;
   $feeds_importer->id = 'ranking_to_media_mention';
   $feeds_importer->config = array(
     'name' => 'Ranking to Media Mention',

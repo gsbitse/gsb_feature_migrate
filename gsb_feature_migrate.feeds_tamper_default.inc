@@ -220,5 +220,31 @@ function gsb_feature_migrate_feeds_tamper_default() {
   $feeds_tamper->description = 'Strip tags';
   $export['news_to_school_story-jsonpath_parser_4-strip_tags'] = $feeds_tamper;
 
+  $feeds_tamper = new stdClass();
+  $feeds_tamper->disabled = FALSE; /* Edit this to true to make a default feeds_tamper disabled initially */
+  $feeds_tamper->api_version = 2;
+  $feeds_tamper->id = 'publications-jsonpath_parser_1-strip_tags';
+  $feeds_tamper->importer = 'publications';
+  $feeds_tamper->source = 'jsonpath_parser:1';
+  $feeds_tamper->plugin_id = 'strip_tags';
+  $feeds_tamper->settings = array(
+    'allowed_tags' => '',
+  );
+  $feeds_tamper->weight = 0;
+  $feeds_tamper->description = 'Strip tags';
+  $export['publications-jsonpath_parser_1-strip_tags'] = $feeds_tamper;
+
+  $feeds_tamper = new stdClass();
+  $feeds_tamper->disabled = FALSE; /* Edit this to true to make a default feeds_tamper disabled initially */
+  $feeds_tamper->api_version = 2;
+  $feeds_tamper->id = 'publications-jsonpath_parser_3-year_to_date_convert';
+  $feeds_tamper->importer = 'publications';
+  $feeds_tamper->source = 'jsonpath_parser:3';
+  $feeds_tamper->plugin_id = 'year_to_date';
+  $feeds_tamper->settings = '';
+  $feeds_tamper->weight = 0;
+  $feeds_tamper->description = 'Year to Date convert';
+  $export['publications-jsonpath_parser_3-year_to_date_convert'] = $feeds_tamper;
+
   return $export;
 }
