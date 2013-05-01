@@ -168,3 +168,103 @@ function gsb_feature_migrate_menu() {
 
   return $items;
 }
+
+/**
+ * Create redirects for imported terms.
+ */
+function gsb_feature_migrate_feeds_after_import(FeedsSource $source) {
+  // Process only if redirect module is enabled.
+  if (module_exists('redirect')) {
+    if ($source->importer->processor->entityType() == 'taxonomy_term') {
+      $vocabulary = $source->importer->processor->vocabulary();
+      // Parse results again.
+      // TODO: Find more elegant way to deal with this.
+      $results = $source->importer->parser->parse($source, $source->fetcher_result);
+
+      // Create redirects.
+      foreach ($results->items as $parser_result) {
+        // Rely on hardcoded targets for now.
+        $term_name = $parser_result['jsonpath_parser:0'];
+        $tid = $parser_result['jsonpath_parser:4'];
+        $alias = $parser_result['jsonpath_parser:5'];
+
+        $term = taxonomy_get_term_by_name($term_name, $vocabulary->machine_name);
+        $term = array_shift($term);
+
+        // Create redirects for old term urls.
+        $redirect_paths = array();
+        $redirect_paths[] = 'taxonomy/term/' . $tid;
+        // Create redirects also for aliases.
+        if (!in_array($alias, $redirect_paths)) {
+          $redirect_paths[] = $alias;
+        }
+
+        foreach ($redirect_paths as $v) {
+          $redirect = new stdClass();
+          redirect_object_prepare($redirect, array(
+            'source' => $v,
+            'redirect' => drupal_get_path_alias('taxonomy/term/' . $term->tid),
+          ));
+
+          $redirects = redirect_load_multiple(array(), array('hash' => redirect_hash($redirect)));
+          if ($redirects) {
+            $redirect = array_shift($redirects);
+            $redirect->redirect = drupal_get_path_alias('taxonomy/term/' . $term->tid);
+          }
+
+          redirect_save($redirect);
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ *
+ * Set default values for feeds sources if not overriden.
+ */
+function gsb_feature_migrate_form_alter(&$form, &$form_state) {
+  if ($form['#form_id'] == 'feeds_import_form') {
+    if (isset($form['feeds']['FeedsHTTPFetcher'])) {
+      $fetcher = &$form['feeds']['FeedsHTTPFetcher'];
+    }
+    elseif (isset($form['feeds']['FeedsCrawler'])) {
+      $fetcher = &$form['feeds']['FeedsCrawler'];
+    }
+    if (isset($fetcher) && empty($fetcher['source']['#default_value'])) {
+      $fetcher['source']['#default_value'] = _gsb_feature_migrate_get_fetcher_source($form['#importer_id']);
+    }
+  }
+}
+
+/**
+ * Helper function to set default sources for importers.
+ *
+ * @param string $importer_id
+ *
+ * @return string Returns tha actual source url
+ */
+function _gsb_feature_migrate_get_fetcher_source($importer_id) {
+  $feeds_sources = array(
+    'files' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_file.json?page=0&pagesize=50',
+    'business_insights' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_node.json?page=0&pagesize=50&param[type]=research',
+    'case_studies' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_node.json?page=0&pagesize=10&param[type]=research_paper',
+    'faculty' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_profile2.json?page=0&pagesize=10&param[type]=faculty',
+    'media_mention' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_node.json?page=0&pagesize=10&param[type]=newsmakers',
+    'news_press_releases_to_news' => 'http://gsb:8080/rm/entity_node.json?page=0&pagesize=10&param[type]=news&param[field_migration_category]=PR',
+    'news_to_business_insight' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_node.json?page=0&pagesize=10&param[type]=news&param[field_migration_category]=BI',
+    'news_to_school_story' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_node.json?page=0&pagesize=10&param[type]=news&param[field_migration_category]=SS',
+    'publications' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_node.json?page=0&pagesize=10&param[type]=publication',
+    'ranking_to_media_mention' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_node.json?page=0&pagesize=10&param[type]=ranking',
+    'research_papers' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_node.json?page=0&pagesize=10&param[type]=research_paper',
+    'taxonomy_business_insight_topic' => 'http://gsb:8080/rm/taxonomy_term.json?vid=18',
+    'taxonomy_company_organization' => 'http://gsb:8080/rm/taxonomy_term.json?vid=19',
+    'taxonomy_discipline' => 'http://gsb:8080/rm/taxonomy_term.json?vid=15',
+    'taxonomy_industry' => 'http://gsb:8080/rm/taxonomy_term.json?vid=16',
+    'taxonomy_region' => 'http://gsb:8080/rm/taxonomy_term.json?vid=17',
+    'taxonomy_tag' => 'http://gsb:8080/rm/taxonomy_term.json?vid=61'
+  );
+
+  return isset($feeds_sources[$importer_id]) ? $feeds_sources[$importer_id] : '';
+}

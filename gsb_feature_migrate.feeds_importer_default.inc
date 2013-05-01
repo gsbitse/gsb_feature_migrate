@@ -54,12 +54,12 @@ function gsb_feature_migrate_feeds_importer_default() {
           'jsonpath_parser:11' => 'path',
           'jsonpath_parser:12' => 'created',
           'jsonpath_parser:13' => 'status',
-          'jsonpath_parser:14' => 'field_news_term_principle.und.*.tid',
-          'jsonpath_parser:15' => 'field_news_term_function.und.*.tid',
-          'jsonpath_parser:16' => 'field_news_term_industry.und.*.tid',
-          'jsonpath_parser:17' => 'field_news_term_region.und.*.tid',
-          'jsonpath_parser:18' => 'field_news_term_company.und.*.tid',
-          'jsonpath_parser:19' => 'field_news_term_tag.und.*.tid',
+          'jsonpath_parser:14' => 'field_news_term_principle.und.*.name',
+          'jsonpath_parser:15' => 'field_news_term_function.und.*.name',
+          'jsonpath_parser:16' => 'field_news_term_industry.und.*.name',
+          'jsonpath_parser:17' => 'field_news_term_region.und.*.name',
+          'jsonpath_parser:18' => 'field_news_term_company.und.*.name',
+          'jsonpath_parser:19' => 'field_news_term_tag.und.*.name',
           'jsonpath_parser:20' => 'field_res_byline.und.*.value',
         ),
         'debug' => array(
@@ -237,7 +237,7 @@ function gsb_feature_migrate_feeds_importer_default() {
           'jsonpath_parser:11' => 'path',
           'jsonpath_parser:18' => 'field_ecopy_pdf.und.*.uri',
           'jsonpath_parser:19' => 'title',
-          'jsonpath_parser:20' => 'field_case_study_keywords.und.*.tid',
+          'jsonpath_parser:20' => 'field_case_study_keywords.und.*.name',
         ),
         'debug' => array(
           'options' => array(
@@ -380,8 +380,8 @@ function gsb_feature_migrate_feeds_importer_default() {
           'jsonpath_parser:19' => '',
           'jsonpath_parser:20' => '',
           'jsonpath_parser:21' => '',
-          'jsonpath_parser:22' => 'field_academic_department.und.*.tid',
-          'jsonpath_parser:23' => 'field_other_academic_department.und.*.tid',
+          'jsonpath_parser:22' => 'field_academic_department.und.*.name',
+          'jsonpath_parser:23' => 'field_other_academic_department.und.*.name',
           'jsonpath_parser:24' => 'field_awards_honors.und.*.field_award_name.und.*.value',
         ),
         'debug' => array(
@@ -702,12 +702,12 @@ function gsb_feature_migrate_feeds_importer_default() {
           'jsonpath_parser:10' => '',
           'jsonpath_parser:11' => 'field_url.und.*.value',
           'jsonpath_parser:12' => 'field_teaser.und.*.value',
-          'jsonpath_parser:13' => 'field_news_term_principle.und.*.tid',
-          'jsonpath_parser:14' => 'field_news_term_function.und.*.tid',
-          'jsonpath_parser:15' => 'field_news_term_industry.und.*.tid',
-          'jsonpath_parser:16' => 'field_news_term_organization.und.*.tid',
-          'jsonpath_parser:17' => 'field_news_term_tag.und.*.tid',
-          'jsonpath_parser:18' => 'field_news_term_region.und.*.tid',
+          'jsonpath_parser:13' => 'field_news_term_principle.und.*.name',
+          'jsonpath_parser:14' => 'field_news_term_function.und.*.name',
+          'jsonpath_parser:15' => 'field_news_term_industry.und.*.name',
+          'jsonpath_parser:16' => 'field_news_term_organization.und.*.name',
+          'jsonpath_parser:17' => 'field_news_term_tag.und.*.name',
+          'jsonpath_parser:18' => 'field_news_term_region.und.*.name',
           'jsonpath_parser:19' => 'field_source_publication.und.*.value',
         ),
         'debug' => array(
@@ -893,12 +893,12 @@ function gsb_feature_migrate_feeds_importer_default() {
           'jsonpath_parser:6' => 'status',
           'jsonpath_parser:10' => 'field_news_image_caption.und.*.value',
           'jsonpath_parser:11' => 'path',
-          'jsonpath_parser:12' => 'field_news_term_function.und.*.tid',
-          'jsonpath_parser:13' => 'field_news_term_industry.und.*.tid',
-          'jsonpath_parser:14' => 'field_news_term_region.und.*.tid',
-          'jsonpath_parser:15' => 'field_news_term_principle.und.*.tid',
-          'jsonpath_parser:16' => 'field_news_term_company.und.*.tid',
-          'jsonpath_parser:17' => 'field_news_term_tag.und.*.tid',
+          'jsonpath_parser:12' => 'field_news_term_function.und.*.name',
+          'jsonpath_parser:13' => 'field_news_term_industry.und.*.name',
+          'jsonpath_parser:14' => 'field_news_term_region.und.*.name',
+          'jsonpath_parser:15' => 'field_news_term_principle.und.*.name',
+          'jsonpath_parser:16' => 'field_news_term_company.und.*.name',
+          'jsonpath_parser:17' => 'field_news_term_tag.und.*.name',
           'jsonpath_parser:18' => 'field_news_image.und.*.uri',
           'jsonpath_parser:19' => 'field_news_byline.und.*.value',
           'jsonpath_parser:20' => '',
@@ -1080,12 +1080,12 @@ function gsb_feature_migrate_feeds_importer_default() {
           'jsonpath_parser:11' => 'path',
           'jsonpath_parser:12' => 'created',
           'jsonpath_parser:13' => 'status',
-          'jsonpath_parser:14' => 'field_news_term_principle.und.*.tid',
-          'jsonpath_parser:15' => 'field_news_term_function.und.*.tid',
-          'jsonpath_parser:16' => 'field_news_term_region.und.*.tid',
-          'jsonpath_parser:17' => 'field_news_term_industry.und.*.tid',
-          'jsonpath_parser:18' => 'field_news_term_company.und.*.tid',
-          'jsonpath_parser:19' => 'field_news_term_tag.und.*.tid',
+          'jsonpath_parser:14' => 'field_news_term_principle.und.*.name',
+          'jsonpath_parser:15' => 'field_news_term_function.und.*.name',
+          'jsonpath_parser:16' => 'field_news_term_region.und.*.name',
+          'jsonpath_parser:17' => 'field_news_term_industry.und.*.name',
+          'jsonpath_parser:18' => 'field_news_term_company.und.*.name',
+          'jsonpath_parser:19' => 'field_news_term_tag.und.*.name',
           'jsonpath_parser:20' => 'field_news_byline.und.*.value',
         ),
         'debug' => array(
@@ -1263,12 +1263,12 @@ function gsb_feature_migrate_feeds_importer_default() {
           'jsonpath_parser:6' => 'status',
           'jsonpath_parser:10' => 'field_news_image_caption.und.*.value',
           'jsonpath_parser:11' => 'path',
-          'jsonpath_parser:12' => 'field_news_term_function.und.*.tid',
-          'jsonpath_parser:13' => 'field_news_term_industry.und.*.tid',
-          'jsonpath_parser:14' => 'field_news_term_region.und.*.tid',
-          'jsonpath_parser:15' => 'field_news_term_principle.und.*.tid',
-          'jsonpath_parser:16' => 'field_news_term_company.und.*.tid',
-          'jsonpath_parser:17' => 'field_news_term_tag.und.*.tid',
+          'jsonpath_parser:12' => 'field_news_term_function.und.*.name',
+          'jsonpath_parser:13' => 'field_news_term_industry.und.*.name',
+          'jsonpath_parser:14' => 'field_news_term_region.und.*.name',
+          'jsonpath_parser:15' => 'field_news_term_principle.und.*.name',
+          'jsonpath_parser:16' => 'field_news_term_company.und.*.name',
+          'jsonpath_parser:17' => 'field_news_term_tag.und.*.name',
           'jsonpath_parser:18' => 'field_news_image.und.*.uri',
           'jsonpath_parser:19' => 'field_news_byline.und.*.value',
           'jsonpath_parser:20' => '',
@@ -1586,12 +1586,12 @@ function gsb_feature_migrate_feeds_importer_default() {
           'jsonpath_parser:3' => 'status',
           'jsonpath_parser:4' => 'created',
           'jsonpath_parser:5' => 'field_ranking_date.und.*.value',
-          'jsonpath_parser:7' => 'field_news_term_principle.und.*.tid',
-          'jsonpath_parser:8' => 'field_news_term_function.und.*.tid',
-          'jsonpath_parser:9' => 'field_news_term_industry.und.*.tid',
-          'jsonpath_parser:10' => 'field_news_term_region.und.*.tid',
-          'jsonpath_parser:11' => 'field_news_term_company.und.*.tid',
-          'jsonpath_parser:12' => 'field_news_term_tag.und.*.tid',
+          'jsonpath_parser:7' => 'field_news_term_principle.und.*.name',
+          'jsonpath_parser:8' => 'field_news_term_function.und.*.name',
+          'jsonpath_parser:9' => 'field_news_term_industry.und.*.name',
+          'jsonpath_parser:10' => 'field_news_term_region.und.*.name',
+          'jsonpath_parser:11' => 'field_news_term_company.und.*.name',
+          'jsonpath_parser:12' => 'field_news_term_tag.und.*.name',
           'jsonpath_parser:14' => 'field_ranking_article.und.*.url',
           'jsonpath_parser:15' => 'field_ranking_publication.und.*.value',
         ),
@@ -1752,7 +1752,7 @@ function gsb_feature_migrate_feeds_importer_default() {
           'jsonpath_parser:11' => 'path',
           'jsonpath_parser:18' => 'field_ecopy_pdf.und.*.uri',
           'jsonpath_parser:19' => 'title',
-          'jsonpath_parser:20' => 'field_case_study_keywords.und.*.tid',
+          'jsonpath_parser:20' => 'field_case_study_keywords.und.*.name',
         ),
         'debug' => array(
           'options' => array(
@@ -1843,6 +1843,558 @@ function gsb_feature_migrate_feeds_importer_default() {
     'process_in_background' => 0,
   );
   $export['research_papers'] = $feeds_importer;
+
+  $feeds_importer = new stdClass();
+  $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
+  $feeds_importer->api_version = 1;
+  $feeds_importer->id = 'taxonomy_business_insight_topic';
+  $feeds_importer->config = array(
+    'name' => 'Taxonomy Business Insight Topic',
+    'description' => '',
+    'fetcher' => array(
+      'plugin_key' => 'FeedsHTTPFetcher',
+      'config' => array(
+        'auto_detect_feeds' => FALSE,
+        'use_pubsubhubbub' => FALSE,
+        'designated_hub' => '',
+        'request_timeout' => NULL,
+      ),
+    ),
+    'parser' => array(
+      'plugin_key' => 'FeedsJSONPathParser',
+      'config' => array(
+        'context' => '$.*',
+        'sources' => array(
+          'jsonpath_parser:0' => 'name',
+          'jsonpath_parser:1' => 'weight',
+          'jsonpath_parser:2' => 'description',
+          'jsonpath_parser:3' => 'parents.name',
+          'jsonpath_parser:4' => 'tid',
+          'jsonpath_parser:5' => 'path_alias',
+        ),
+        'debug' => array(
+          'options' => array(
+            'context' => 0,
+            'jsonpath_parser:0' => 0,
+            'jsonpath_parser:1' => 0,
+            'jsonpath_parser:2' => 0,
+            'jsonpath_parser:3' => 0,
+            'jsonpath_parser:4' => 0,
+            'jsonpath_parser:5' => 0,
+          ),
+        ),
+      ),
+    ),
+    'processor' => array(
+      'plugin_key' => 'FeedsTermProcessor',
+      'config' => array(
+        'vocabulary' => 0,
+        'mappings' => array(
+          0 => array(
+            'source' => 'jsonpath_parser:0',
+            'target' => 'name',
+            'unique' => 1,
+          ),
+          1 => array(
+            'source' => 'jsonpath_parser:1',
+            'target' => 'weight',
+            'unique' => FALSE,
+          ),
+          2 => array(
+            'source' => 'jsonpath_parser:2',
+            'target' => 'description',
+            'unique' => FALSE,
+          ),
+          3 => array(
+            'source' => 'jsonpath_parser:3',
+            'target' => 'parent',
+            'unique' => FALSE,
+          ),
+          4 => array(
+            'source' => 'jsonpath_parser:4',
+            'target' => 'temp_tid',
+            'unique' => FALSE,
+          ),
+          5 => array(
+            'source' => 'jsonpath_parser:5',
+            'target' => 'temp_path_alias',
+            'unique' => FALSE,
+          ),
+        ),
+        'update_existing' => '2',
+        'input_format' => 'panopoly_wysiwyg_text',
+        'skip_hash_check' => 0,
+        'bundle' => 'business_insight_topic',
+      ),
+    ),
+    'content_type' => '',
+    'update' => 0,
+    'import_period' => '-1',
+    'expire_period' => 3600,
+    'import_on_create' => 1,
+    'process_in_background' => 0,
+  );
+  $export['taxonomy_business_insight_topic'] = $feeds_importer;
+
+  $feeds_importer = new stdClass();
+  $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
+  $feeds_importer->api_version = 1;
+  $feeds_importer->id = 'taxonomy_company_organization';
+  $feeds_importer->config = array(
+    'name' => 'Taxonomy Company/Organization',
+    'description' => '',
+    'fetcher' => array(
+      'plugin_key' => 'FeedsHTTPFetcher',
+      'config' => array(
+        'auto_detect_feeds' => FALSE,
+        'use_pubsubhubbub' => FALSE,
+        'designated_hub' => '',
+        'request_timeout' => NULL,
+      ),
+    ),
+    'parser' => array(
+      'plugin_key' => 'FeedsJSONPathParser',
+      'config' => array(
+        'context' => '$.*',
+        'sources' => array(
+          'jsonpath_parser:0' => 'name',
+          'jsonpath_parser:1' => 'weight',
+          'jsonpath_parser:2' => 'description',
+          'jsonpath_parser:3' => 'parents.name',
+          'jsonpath_parser:4' => 'tid',
+          'jsonpath_parser:5' => 'path_alias',
+        ),
+        'debug' => array(
+          'options' => array(
+            'context' => 0,
+            'jsonpath_parser:0' => 0,
+            'jsonpath_parser:1' => 0,
+            'jsonpath_parser:2' => 0,
+            'jsonpath_parser:3' => 0,
+            'jsonpath_parser:4' => 0,
+            'jsonpath_parser:5' => 0,
+          ),
+        ),
+      ),
+    ),
+    'processor' => array(
+      'plugin_key' => 'FeedsTermProcessor',
+      'config' => array(
+        'vocabulary' => 0,
+        'mappings' => array(
+          0 => array(
+            'source' => 'jsonpath_parser:0',
+            'target' => 'name',
+            'unique' => 1,
+          ),
+          1 => array(
+            'source' => 'jsonpath_parser:1',
+            'target' => 'weight',
+            'unique' => FALSE,
+          ),
+          2 => array(
+            'source' => 'jsonpath_parser:2',
+            'target' => 'description',
+            'unique' => FALSE,
+          ),
+          3 => array(
+            'source' => 'jsonpath_parser:3',
+            'target' => 'parent',
+            'unique' => FALSE,
+          ),
+          4 => array(
+            'source' => 'jsonpath_parser:4',
+            'target' => 'temp_tid',
+            'unique' => FALSE,
+          ),
+          5 => array(
+            'source' => 'jsonpath_parser:5',
+            'target' => 'temp_path_alias',
+            'unique' => FALSE,
+          ),
+        ),
+        'update_existing' => '2',
+        'input_format' => 'panopoly_wysiwyg_text',
+        'skip_hash_check' => 0,
+        'bundle' => 'company_organization',
+      ),
+    ),
+    'content_type' => '',
+    'update' => 0,
+    'import_period' => '-1',
+    'expire_period' => 3600,
+    'import_on_create' => 1,
+    'process_in_background' => 0,
+  );
+  $export['taxonomy_company_organization'] = $feeds_importer;
+
+  $feeds_importer = new stdClass();
+  $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
+  $feeds_importer->api_version = 1;
+  $feeds_importer->id = 'taxonomy_discipline';
+  $feeds_importer->config = array(
+    'name' => 'Taxonomy Discipline',
+    'description' => 'Taxonomy (Function to Discipline)',
+    'fetcher' => array(
+      'plugin_key' => 'FeedsHTTPFetcher',
+      'config' => array(
+        'auto_detect_feeds' => FALSE,
+        'use_pubsubhubbub' => FALSE,
+        'designated_hub' => '',
+        'request_timeout' => NULL,
+      ),
+    ),
+    'parser' => array(
+      'plugin_key' => 'FeedsJSONPathParser',
+      'config' => array(
+        'context' => '$.*',
+        'sources' => array(
+          'jsonpath_parser:0' => 'name',
+          'jsonpath_parser:1' => 'weight',
+          'jsonpath_parser:2' => 'description',
+          'jsonpath_parser:3' => 'parents.name',
+          'jsonpath_parser:4' => 'tid',
+          'jsonpath_parser:5' => 'path_alias',
+        ),
+        'debug' => array(
+          'options' => array(
+            'context' => 0,
+            'jsonpath_parser:0' => 0,
+            'jsonpath_parser:1' => 0,
+            'jsonpath_parser:2' => 0,
+            'jsonpath_parser:3' => 0,
+            'jsonpath_parser:4' => 0,
+            'jsonpath_parser:5' => 0,
+          ),
+        ),
+      ),
+    ),
+    'processor' => array(
+      'plugin_key' => 'FeedsTermProcessor',
+      'config' => array(
+        'vocabulary' => 0,
+        'mappings' => array(
+          0 => array(
+            'source' => 'jsonpath_parser:0',
+            'target' => 'name',
+            'unique' => 1,
+          ),
+          1 => array(
+            'source' => 'jsonpath_parser:1',
+            'target' => 'weight',
+            'unique' => FALSE,
+          ),
+          2 => array(
+            'source' => 'jsonpath_parser:2',
+            'target' => 'description',
+            'unique' => FALSE,
+          ),
+          3 => array(
+            'source' => 'jsonpath_parser:3',
+            'target' => 'parent',
+            'unique' => FALSE,
+          ),
+          4 => array(
+            'source' => 'jsonpath_parser:4',
+            'target' => 'temp_tid',
+            'unique' => FALSE,
+          ),
+          5 => array(
+            'source' => 'jsonpath_parser:5',
+            'target' => 'temp_path_alias',
+            'unique' => FALSE,
+          ),
+        ),
+        'update_existing' => '2',
+        'input_format' => 'panopoly_wysiwyg_text',
+        'skip_hash_check' => 0,
+        'bundle' => 'discipline',
+      ),
+    ),
+    'content_type' => '',
+    'update' => 0,
+    'import_period' => '-1',
+    'expire_period' => 3600,
+    'import_on_create' => 1,
+    'process_in_background' => 0,
+  );
+  $export['taxonomy_discipline'] = $feeds_importer;
+
+  $feeds_importer = new stdClass();
+  $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
+  $feeds_importer->api_version = 1;
+  $feeds_importer->id = 'taxonomy_industry';
+  $feeds_importer->config = array(
+    'name' => 'Taxonomy Industry',
+    'description' => '',
+    'fetcher' => array(
+      'plugin_key' => 'FeedsHTTPFetcher',
+      'config' => array(
+        'auto_detect_feeds' => FALSE,
+        'use_pubsubhubbub' => FALSE,
+        'designated_hub' => '',
+        'request_timeout' => NULL,
+      ),
+    ),
+    'parser' => array(
+      'plugin_key' => 'FeedsJSONPathParser',
+      'config' => array(
+        'context' => '$.*',
+        'sources' => array(
+          'jsonpath_parser:0' => 'name',
+          'jsonpath_parser:1' => 'weight',
+          'jsonpath_parser:2' => 'description',
+          'jsonpath_parser:3' => 'parents.name',
+          'jsonpath_parser:4' => 'tid',
+          'jsonpath_parser:5' => 'path_alias',
+        ),
+        'debug' => array(
+          'options' => array(
+            'context' => 0,
+            'jsonpath_parser:0' => 0,
+            'jsonpath_parser:1' => 0,
+            'jsonpath_parser:2' => 0,
+            'jsonpath_parser:3' => 0,
+            'jsonpath_parser:4' => 0,
+            'jsonpath_parser:5' => 0,
+          ),
+        ),
+      ),
+    ),
+    'processor' => array(
+      'plugin_key' => 'FeedsTermProcessor',
+      'config' => array(
+        'vocabulary' => 0,
+        'mappings' => array(
+          0 => array(
+            'source' => 'jsonpath_parser:0',
+            'target' => 'name',
+            'unique' => 1,
+          ),
+          1 => array(
+            'source' => 'jsonpath_parser:1',
+            'target' => 'weight',
+            'unique' => FALSE,
+          ),
+          2 => array(
+            'source' => 'jsonpath_parser:2',
+            'target' => 'description',
+            'unique' => FALSE,
+          ),
+          3 => array(
+            'source' => 'jsonpath_parser:3',
+            'target' => 'parent',
+            'unique' => FALSE,
+          ),
+          4 => array(
+            'source' => 'jsonpath_parser:4',
+            'target' => 'temp_tid',
+            'unique' => FALSE,
+          ),
+          5 => array(
+            'source' => 'jsonpath_parser:5',
+            'target' => 'temp_path_alias',
+            'unique' => FALSE,
+          ),
+        ),
+        'update_existing' => '2',
+        'input_format' => 'panopoly_wysiwyg_text',
+        'skip_hash_check' => 0,
+        'bundle' => 'industry',
+      ),
+    ),
+    'content_type' => '',
+    'update' => 0,
+    'import_period' => '-1',
+    'expire_period' => 3600,
+    'import_on_create' => 1,
+    'process_in_background' => 0,
+  );
+  $export['taxonomy_industry'] = $feeds_importer;
+
+  $feeds_importer = new stdClass();
+  $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
+  $feeds_importer->api_version = 1;
+  $feeds_importer->id = 'taxonomy_region';
+  $feeds_importer->config = array(
+    'name' => 'Taxonomy Region',
+    'description' => '',
+    'fetcher' => array(
+      'plugin_key' => 'FeedsHTTPFetcher',
+      'config' => array(
+        'auto_detect_feeds' => FALSE,
+        'use_pubsubhubbub' => FALSE,
+        'designated_hub' => '',
+        'request_timeout' => NULL,
+      ),
+    ),
+    'parser' => array(
+      'plugin_key' => 'FeedsJSONPathParser',
+      'config' => array(
+        'context' => '$.*',
+        'sources' => array(
+          'jsonpath_parser:0' => 'name',
+          'jsonpath_parser:1' => 'weight',
+          'jsonpath_parser:2' => 'description',
+          'jsonpath_parser:3' => 'parents.name',
+          'jsonpath_parser:4' => 'tid',
+          'jsonpath_parser:5' => 'path_alias',
+        ),
+        'debug' => array(
+          'options' => array(
+            'context' => 0,
+            'jsonpath_parser:0' => 0,
+            'jsonpath_parser:1' => 0,
+            'jsonpath_parser:2' => 0,
+            'jsonpath_parser:3' => 0,
+            'jsonpath_parser:4' => 0,
+            'jsonpath_parser:5' => 0,
+          ),
+        ),
+      ),
+    ),
+    'processor' => array(
+      'plugin_key' => 'FeedsTermProcessor',
+      'config' => array(
+        'vocabulary' => 0,
+        'mappings' => array(
+          0 => array(
+            'source' => 'jsonpath_parser:0',
+            'target' => 'name',
+            'unique' => 1,
+          ),
+          1 => array(
+            'source' => 'jsonpath_parser:1',
+            'target' => 'weight',
+            'unique' => FALSE,
+          ),
+          2 => array(
+            'source' => 'jsonpath_parser:2',
+            'target' => 'description',
+            'unique' => FALSE,
+          ),
+          3 => array(
+            'source' => 'jsonpath_parser:3',
+            'target' => 'parent',
+            'unique' => FALSE,
+          ),
+          4 => array(
+            'source' => 'jsonpath_parser:4',
+            'target' => 'temp_tid',
+            'unique' => FALSE,
+          ),
+          5 => array(
+            'source' => 'jsonpath_parser:5',
+            'target' => 'temp_path_alias',
+            'unique' => FALSE,
+          ),
+        ),
+        'update_existing' => '2',
+        'input_format' => 'panopoly_wysiwyg_text',
+        'skip_hash_check' => 0,
+        'bundle' => 'region',
+      ),
+    ),
+    'content_type' => '',
+    'update' => 0,
+    'import_period' => '-1',
+    'expire_period' => 3600,
+    'import_on_create' => 1,
+    'process_in_background' => 0,
+  );
+  $export['taxonomy_region'] = $feeds_importer;
+
+  $feeds_importer = new stdClass();
+  $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
+  $feeds_importer->api_version = 1;
+  $feeds_importer->id = 'taxonomy_tag';
+  $feeds_importer->config = array(
+    'name' => 'Taxonomy Tag',
+    'description' => '',
+    'fetcher' => array(
+      'plugin_key' => 'FeedsHTTPFetcher',
+      'config' => array(
+        'auto_detect_feeds' => FALSE,
+        'use_pubsubhubbub' => FALSE,
+        'designated_hub' => '',
+        'request_timeout' => NULL,
+      ),
+    ),
+    'parser' => array(
+      'plugin_key' => 'FeedsJSONPathParser',
+      'config' => array(
+        'context' => '$.*',
+        'sources' => array(
+          'jsonpath_parser:0' => 'name',
+          'jsonpath_parser:1' => 'weight',
+          'jsonpath_parser:2' => 'description',
+          'jsonpath_parser:3' => 'parents.name',
+          'jsonpath_parser:4' => 'tid',
+          'jsonpath_parser:5' => 'path_alias',
+        ),
+        'debug' => array(
+          'options' => array(
+            'context' => 0,
+            'jsonpath_parser:0' => 0,
+            'jsonpath_parser:1' => 0,
+            'jsonpath_parser:2' => 0,
+            'jsonpath_parser:3' => 0,
+            'jsonpath_parser:4' => 0,
+            'jsonpath_parser:5' => 0,
+          ),
+        ),
+      ),
+    ),
+    'processor' => array(
+      'plugin_key' => 'FeedsTermProcessor',
+      'config' => array(
+        'vocabulary' => 0,
+        'mappings' => array(
+          0 => array(
+            'source' => 'jsonpath_parser:0',
+            'target' => 'name',
+            'unique' => 1,
+          ),
+          1 => array(
+            'source' => 'jsonpath_parser:1',
+            'target' => 'weight',
+            'unique' => FALSE,
+          ),
+          2 => array(
+            'source' => 'jsonpath_parser:2',
+            'target' => 'description',
+            'unique' => FALSE,
+          ),
+          3 => array(
+            'source' => 'jsonpath_parser:3',
+            'target' => 'parent',
+            'unique' => FALSE,
+          ),
+          4 => array(
+            'source' => 'jsonpath_parser:4',
+            'target' => 'temp_tid',
+            'unique' => FALSE,
+          ),
+          5 => array(
+            'source' => 'jsonpath_parser:5',
+            'target' => 'temp_path_alias',
+            'unique' => FALSE,
+          ),
+        ),
+        'update_existing' => '2',
+        'input_format' => 'panopoly_wysiwyg_text',
+        'skip_hash_check' => 0,
+        'bundle' => 'tag',
+      ),
+    ),
+    'content_type' => '',
+    'update' => 0,
+    'import_period' => '-1',
+    'expire_period' => 3600,
+    'import_on_create' => 1,
+    'process_in_background' => 0,
+  );
+  $export['taxonomy_tag'] = $feeds_importer;
 
   return $export;
 }
