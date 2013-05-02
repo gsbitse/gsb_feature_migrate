@@ -258,12 +258,12 @@ function _gsb_feature_migrate_get_fetcher_source($importer_id) {
     'publications' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_node.json?page=0&pagesize=10&param[type]=publication',
     'ranking_to_media_mention' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_node.json?page=0&pagesize=10&param[type]=ranking',
     'research_papers' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_node.json?page=0&pagesize=10&param[type]=research_paper',
-    'taxonomy_business_insight_topic' => 'http://gsb:8080/rm/taxonomy_term.json?vid=18',
-    'taxonomy_company_organization' => 'http://gsb:8080/rm/taxonomy_term.json?vid=19',
-    'taxonomy_discipline' => 'http://gsb:8080/rm/taxonomy_term.json?vid=15',
-    'taxonomy_industry' => 'http://gsb:8080/rm/taxonomy_term.json?vid=16',
-    'taxonomy_region' => 'http://gsb:8080/rm/taxonomy_term.json?vid=17',
-    'taxonomy_tag' => 'http://gsb:8080/rm/taxonomy_term.json?vid=61'
+    'taxonomy_business_insight_topic' => 'http://sfordsbox.prod.acquia-sites.com/rm/taxonomy_term.json?vid=18',
+    'taxonomy_company_organization' => 'http://sfordsbox.prod.acquia-sites.com/rm/taxonomy_term.json?vid=19',
+    'taxonomy_discipline' => 'http://sfordsbox.prod.acquia-sites.com/rm/taxonomy_term.json?vid=15',
+    'taxonomy_industry' => 'http://sfordsbox.prod.acquia-sites.com/rm/taxonomy_term.json?vid=16',
+    'taxonomy_region' => 'http://sfordsbox.prod.acquia-sites.com/rm/taxonomy_term.json?vid=17',
+    'taxonomy_tag' => 'http://sfordsbox.prod.acquia-sites.com/rm/taxonomy_term.json?vid=61'
   );
 
   return isset($feeds_sources[$importer_id]) ? $feeds_sources[$importer_id] : '';
