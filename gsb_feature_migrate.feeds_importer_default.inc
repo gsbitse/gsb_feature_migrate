@@ -565,7 +565,7 @@ function gsb_feature_migrate_feeds_importer_default() {
           'auto' => '0',
           'xpath' => '',
           'url' => array(
-            'url_pattern' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_file.json?page=$index&pagesize=10',
+            'url_pattern' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_file.json?page=$index&pagesize=100',
             'initial' => '0',
             'increment' => '1',
           ),

@@ -247,7 +247,7 @@ function gsb_feature_migrate_form_alter(&$form, &$form_state) {
  */
 function _gsb_feature_migrate_get_fetcher_source($importer_id) {
   $feeds_sources = array(
-    'files' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_file.json?page=0&pagesize=50',
+    'files' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_file.json?page=0&pagesize=100',
     'business_insights' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_node.json?page=0&pagesize=50&param[type]=research',
     'case_studies' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_node.json?page=0&pagesize=10&param[type]=research_paper',
     'faculty' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_profile2.json?page=0&pagesize=10&param[type]=faculty',
