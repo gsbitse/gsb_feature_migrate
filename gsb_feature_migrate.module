@@ -252,7 +252,7 @@ function _gsb_feature_migrate_get_fetcher_source($importer_id) {
     'case_studies' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_node.json?page=0&pagesize=10&param[type]=research_paper',
     'faculty' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_profile2.json?page=0&pagesize=10&param[type]=faculty',
     'media_mention' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_node.json?page=0&pagesize=10&param[type]=newsmakers',
-    'news_press_releases_to_news' => 'http://gsb:8080/rm/entity_node.json?page=0&pagesize=10&param[type]=news&param[field_migration_category]=PR',
+    'news_press_releases_to_news' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_node.json?page=0&pagesize=10&param[type]=news&param[field_migration_category]=PR',
     'news_to_business_insight' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_node.json?page=0&pagesize=10&param[type]=news&param[field_migration_category]=BI',
     'news_to_school_story' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_node.json?page=0&pagesize=10&param[type]=news&param[field_migration_category]=SS',
     'publications' => 'http://sfordsbox.prod.acquia-sites.com/rm/entity_node.json?page=0&pagesize=10&param[type]=publication',
